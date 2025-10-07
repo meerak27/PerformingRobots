@@ -41,20 +41,25 @@ Once everything lined up, we screwed it all in place - and now the full structur
 This session, we started building the main torso of the robot.  
 ![IMG_9606](https://github.com/user-attachments/assets/4030e2e7-799f-48be-9c0a-16c6419435f3)
 ![IMG_9607](https://github.com/user-attachments/assets/c3568614-ec3d-477e-8aa6-fd5c09e2b9be)
+<img width="271" height="353" alt="Screenshot 2025-10-07 at 12 09 49 PM" src="https://github.com/user-attachments/assets/b2616176-57c8-4f25-b43b-f7fa4d979965" />
 
-Last class, we measured the wood and sketched out our design — we decided on a **slot machine** look. The main appendage will be a crank/lever. For now, it’s made of styrofoam: we hot-glued multiple styrofoam cylinders together to make a long handle and topped it with a styrofoam sphere. It’s just a placeholder for now, but we plan to revisit it later with better materials or a more creative idea.
+Last class, we measured the wood and sketched out our design, we settled on a **slot machine** look. We also decided that our material would be cardboard. The main appendage will be a crank/lever. For now, it’s made of styrofoam: we hot-glued multiple styrofoam cylinders together to make a long handle and topped it with a styrofoam sphere. It’s just a placeholder for now, but we plan to revisit it later with better materials or a more creative idea. We also plan to add a few more special elements, see the photo above for reference of our inspiration.
+
 ![IMG_9609](https://github.com/user-attachments/assets/6a1bdaec-bbf2-4aee-a83c-ca71e4c6c362)
 
-For the **cardboard body**, we measured and cut out the initial pieces, but balancing and attaching them was trickier than expected. Some screws and uneven spots made alignment difficult, so we adjusted the measurements and managed to secure the first panel. The other two sides took longer — it was a lot of trial and error, with multiple rounds of cutting, trimming, and tinkering until everything fit as we saw fit.  
+For the cardboard body, we measured and cut out the initial pieces, but balancing and attaching them was trickier than expected. Some screws and uneven spots made alignment difficult, so we adjusted the measurements and managed to secure the first panel. The other two sides took longer. It was a lot of trial and error, with multiple rounds of cutting, trimming, and tinkering until everything fit as we saw fit.  
 
 When one piece didn’t fit, we repurposed it into smaller braces instead of wasting material. Then we cut a fresh piece of cardboard for the final panel. Since this was our first time working with cardboard, we learned a few helpful tricks along the way.  
 
-After getting the main panels up, we **hot-glued the base** and added several internal braces for extra support. By the end, the frame felt solid and stable.
+After getting the main panels up, we hot-glued the sides and base, we then added several internal braces for extra support. By the end, the frame felt solid and stable.
+
 ![IMG_9611](https://github.com/user-attachments/assets/2ad032fb-1be7-40f7-8265-5636fe20e085)
 ![IMG_9612](https://github.com/user-attachments/assets/28539559-421b-4334-bfba-6d10e986e0e6)
 
-Next, we needed a wood plank for the servo motor. Since the scene shop was closed, we found spare wood blocks in the IM lab, hand-sawed a piece to size, and attached it with **Fevicol**. We **clamped it down overnight** to let it set properly.  
+Next, we needed a wood plank for the servo motor. Since the scene shop was closed, we found spare wood blocks in the IM lab, hand-sawed a piece to size, and attached it with **Fevicol**. We clamped it down overnight to let it set properly.  
+
 ![IMG_9610](https://github.com/user-attachments/assets/412bb8d8-4637-4e00-8b8e-7ad9b1e3aefa)
-We also cut a slit in the back though next time, we’ll widen it to make it easier to reach inside and see through.
+
+We also cut a slit in the back though we will likely have to widen it to make it easier to reach inside and see through.
 
 **Next Step:** Check if the wood block set securely, widen the back slot, and attach the servo motor and crank.
