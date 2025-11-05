@@ -1,7 +1,7 @@
 # Meera AlKhazraji's Journal 
-## Victor and I have collaborated on this project from start to finish.
+## Victor Nadu and I have collaborated on this project from start to finish. 
 
-## Entry One: Building Robot Height
+### Entry One: Building Robot Height
 #### October 2, 2025
 
 **Step 0:** We started by finding the right plank of wood — cut it down to length and sanded it smooth. (I’ll add the sanding photos here!)  
@@ -33,7 +33,7 @@ Once everything lined up, we screwed it all in place - and now the full structur
  **Next Step:** Test the balance and stability before adding any additional weight or components. Carve out the cardboard necessary for the body. 
 <img src="https://github.com/user-attachments/assets/f7fa1ac5-8581-4de9-9326-f657c887b418" width="300">
 <img src="https://github.com/user-attachments/assets/83cde54c-233a-44aa-9c4d-60b978992f63" width="300">
-## Entry Two: Building the Cardboard Body
+### Entry Two: Building the Cardboard Body
 #### October 7, 2025
 
 This session, we started building the main torso of the robot.  
