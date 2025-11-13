@@ -1,3 +1,7 @@
+// Meera AlKhazraji
+// 13 Nov
+// must check if backwards is now more stable 
+
 #include <EnableInterrupt.h>
 #define SERIAL_PORT_SPEED 9600
 #define RC_NUM_CHANNELS 4
