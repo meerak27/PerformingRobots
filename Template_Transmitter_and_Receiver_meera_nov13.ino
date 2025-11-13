@@ -1,3 +1,7 @@
+// Meera Al Khazraji & Vicor Nadu
+// Professor Micheal Shiloh
+// Performing Robots Fall '25
+
 /*
    Using the nRF24L01 radio module to communicate
    between two Arduinos with much increased reliability following
