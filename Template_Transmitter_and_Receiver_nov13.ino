@@ -365,6 +365,7 @@ const int CRANK_SERVO_PIN = 20; // This is the pin for your crank servo
 // MEERA EDITS 
 const int NEOPIXELPIN = 17;
 const int NUMPIXELS = 31;
+const int MOTOR_PIN = 8;  // DC motor control pin
 bool isFlashingRed = false;
 unsigned long redFlashStartTime = 0;
 const unsigned long RED_FLASH_DURATION = 4500;
@@ -434,6 +435,11 @@ unsigned long lastCrankMoveTime = 0; // Timestamp of the last crank move
 // MEERA EDIT
 void setup() {
   Serial.begin(9600);
+  // --- DC motor simple spin in setup ---
+  pinMode(MOTOR_PIN, OUTPUT);
+  digitalWrite(MOTOR_PIN, HIGH);  // turn motor ON
+  delay(5000);                    // keep it on for 5 seconds
+  digitalWrite(MOTOR_PIN, LOW);   // turn motor OFF
   // printf_begin();
   // Set up all the attached hardware
   setupMusicMakerShield();
