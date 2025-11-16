@@ -140,7 +140,7 @@ During rehearsal the next day, we discovered a major issue: the robot had signif
 <img src="https://github.com/user-attachments/assets/cca1b9c2-4223-4e61-95f4-680f138ca075" width="300">
 <img src="https://github.com/user-attachments/assets/28734686-fc81-4c60-bd43-8139a0a61853" width="300">
 <img src="https://github.com/user-attachments/assets/11f878a1-b480-4fc4-96aa-bf82cf46d772" width="300">
-
+ [cases demo]([url](https://drive.google.com/file/d/1NXZ6YmgtkAqCHvUBDg4O09I4oM1MH2kT/view?usp=sharing))
 
 Because the robot had a ‘top-heavy’ balance and was unstable, we decided to add a second caster wheel on the back. The scene shop was closed, so I used the scraps in the IM lab + the wood planks for the original shelf idea I had to prototype the position. I used clamps to make sure the caster did not touch the ground unless the robot leaned too far back. Once the alignment felt right, I bolted everything down.
 
