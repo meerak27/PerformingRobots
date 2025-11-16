@@ -1,4 +1,4 @@
-# Meera AlKhazraji's Journal 
+![IMG_0774](https://github.com/user-attachments/assets/84163378-2085-45d0-9085-ced25b628f3b)![IMG_0775](https://github.com/user-attachments/assets/63a5cecf-ed66-41a0-afc8-86e00ff30ad0)# Meera AlKhazraji's Journal 
 ## Victor Nadu and I have collaborated on this project from start to finish. 
 
 ### Entry One: Building Robot Height
@@ -120,3 +120,45 @@ We returned to the lab to find a better reel design because the hexagons did not
 <img src="https://github.com/user-attachments/assets/b5e26061-7e66-47de-978c-90a5bdf4d79e" width="300">
 
 We added mounting strip tape to the back of the NeoPixels and wrapped them around the pole. After securing them, we cleaned up the cable management and attached the frosted dome on top. The lighting looked correct once installed. Next, we cut the front opening of the robot. This cutout is where the three reels will slightly protrude when the stepper motor turns them. We adjusted the cutout to ensure it was large enough for visibility and movement. We began experimenting with ways to mount the stepper motor. Our first attempt involved attaching wood planks to the sides. I cut several planks in the scene shop, and we adjusted some of them with the hand saw in the lab. After discussing with the professor and Dustin, we realized this was not the best solution. The professor recommended creating a shelf structure instead, which we will work on next. In the meantime, we focused on attaching the circular reel pieces to the stepper motor. Because of the stoppers on the rod, we needed a way to secure the reel forms while still allowing access for tightening. We tried alternating patterns at first, but Dustin recommended using grub screws for a cleaner and more reliable connection. This allowed us to widen the central hole and attach the circular forms securely while maintaining minimal spacing between reels. After making these changes, we attached all six circular panels to the stepper motor shaft. The remaining task is to wrap them in the heavy cardboard-style paper and finalize the artwork. We are deciding whether to use traditional Las Vegas symbols or incorporate imagery connected to the script we are working with. The next steps include designing the reel graphics, building the shelf structure for the stepper motor, and brainstorming an additional feature such as a dispenser. We plan to finalize this brainstorming by the end of Thursday.
+
+### Entry Nine: Shelf Construction for the Reels 
+### November 6–7
+<img src="https://github.com/user-attachments/assets/c4bda38b-bb57-42fa-850a-40c441eb75fd" width="300">
+<img src="https://github.com/user-attachments/assets/85d8ee3b-ebae-4e9b-8788-72b8e61c4117" width="300">
+<img src="https://github.com/user-attachments/assets/41b378aa-0113-4977-a44a-b4a8e38727b1" width="300">
+<img src="https://github.com/user-attachments/assets/072c20d7-e115-4e2f-bf2c-fde323104efc" width="300">
+<img src="https://github.com/user-attachments/assets/6a18b077-0908-4a2d-985d-f7153aa4c53b" width="300">
+
+
+We made a cutout in the front of the robot where the reels will eventually sit. I cut a large rectangular opening in the cardboard with enough clearance for the rotating reels to be visible and accessible. Before this, I had already cut several pieces of wood with a completely different mounting idea in mind, but after discussing with Dustin, I quickly realized my original plan would be weak and cause alot of balance issues. The professor and I brainstormed alternative structures, and we decided a shelf design would be more secure. We prototyped on paper, then went to the scene shop to cut the wood planks for the shelf. After cutting the wood to size, I mounted the shelf by attaching three L-brackets to the main vertical wooden plank that runs from the base to the top. I then drilled holes on both sides of the shelf to support the DC motor. This gave us a sturdy base for the motor. To make this easier during testing, I also cut openings on the sides of the front of the cardboard body so the dc motor can easily be taken in and out. 
+During rehearsal the next day, we discovered a major issue: the robot had significant balance problems and was close to tipping over various times. We did not yet have the code or movement fully tuned, so from this point forward we focused a main priority was the robots stability which we will later address on the code and and in the fabrication.
+
+### Entry Ten: Adding the Caster Wheel, Prototyping Shield, and Power Issues 
+### November 10–14
+<img src="https://github.com/user-attachments/assets/877990b3-a7c0-4c5d-8a17-2c95aba6a3a2" width="300">
+<img src="https://github.com/user-attachments/assets/3a8abb26-e246-497d-8637-0687cbcbd491" width="300">
+<img src="https://github.com/user-attachments/assets/cca1b9c2-4223-4e61-95f4-680f138ca075" width="300">
+<img src="https://github.com/user-attachments/assets/28734686-fc81-4c60-bd43-8139a0a61853" width="300">
+<img src="https://github.com/user-attachments/assets/11f878a1-b480-4fc4-96aa-bf82cf46d772" width="300">
+
+
+Because the robot had a ‘top-heavy’ balance and was unstable, we decided to add a second caster wheel on the back. The scene shop was closed, so I used the scraps in the IM lab + the wood planks for the original shelf idea I had to prototype the position. I used clamps to make sure the caster did not touch the ground unless the robot leaned too far back. Once the alignment felt right, I bolted everything down.
+
+Aswell, I worked with the professor to add the prototyping shield for the dc motor. We soldered headers, screw terminals, resistors, and several cables needed for the DC motor, and at that point we believed the soldering was complete (will revisit this in the next entry).
+
+When I started writing the cases, I realized the neopixels were drawing a lot of power. This caused the servo motor to shake uncontrollably, and the shaking detached the pole we had mounted on the servo horn. To deal with this, I added code that detaches the servo motor when it is not needed and only reattaches it when a case requires movement. This helped reduce power strain, but I still need to discuss with the professor the best long-term method to stabilize the power draw. Because of these issues, the professor and Victor worked closely to reinforce the attachment between the pole and the servo motor. The ball on top of the pipe, which is part of the crank mechanism, also kept falling off, so Victor and I are still considering better ways to secure it.
+
+The next work session focused on imporoving the transmitter controls. Victor tuned the parameters for the servo motor until the motion became smooth. I was also able to control the neopixels and trigger lines from the script using the transmitter. This part took a significant learning curve, but once I understood it, everything worked reliably. By the end of this stage, I could control the main elements of the robot: the voice, the servo motor, and the neopixels. We still need to figure out how best to secure the speaker as its still not fully secured properly.
+
+We then had rehearsals, we were continuing to troubleshoot the robot balance before and after rehearsals. Even after refining the code for acceleration and deceleration, the robot still had stability issue which thankfully after the rehearsal we improved  by about 90% by improving the code and tightening the nuts on the wheels on the bottom.  During rehearsal, a major problem occurred when we stacked the prototyping shield on top of the music maker shield. The DC motor immediately started running uncontrollably, breaking one of the cardboard panels (for the reel) and bending several of the solder brackets. We discovered this happened because we had forgotten an additional resistor. After adding it, the problem stopped, and we wrapped up the day.
+
+
+### Entry Eleven: Weekend Work and Reel Decoration 
+### November 14–16
+<img src="https://github.com/user-attachments/assets/9e3cb891-df91-4f1f-9fb7-8d6f2e7b81af" width="300">
+<img src="https://github.com/user-attachments/assets/b3d78b2c-b48f-421b-9383-3280244c76d0" width="300">
+<img src="https://github.com/user-attachments/assets/a1d38fe0-7c38-448e-8de7-047a87c72000" width="300">
+
+We planned the decoration for the reels and initially ordered glitter paper to cover them. The size was wrong, so we attempted another solution, but we were not happy with how it looked when the reels were still. We will test how it appears while spinning and decide whether to redo it after seeing it in motion. We also designed fifteen unique symbols for the reels using AI. Each reel will have five symbols. We are turning these designs into holographic stickers so they can stand out on stage. The stickers should be ready on Monday.
+
+We also finalized the robot’s voice and generated much more spoken lines. We also added the initial DC motor code to run the reels to tested that all is finally working as it should be with it.  The remaining tasks are to write the final integrated code with all the cases (which we now know hwo to do, we just need to address the power issue), turn all script lines into text-to-speech, stick the symbols to the reels, adjust the decoration on the reels and the robots exterior.
