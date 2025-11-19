@@ -1,7 +1,7 @@
 // Meera Al Khazraji & Vicor Nadu
 // Professor Micheal Shiloh
 // Performing Robots Fall '25
-
+// Template of this code was taken from Professor Shiloh. We have attempted to mark all edits as we go along, but we will undoubtedly miss some.
 /*
    Using the nRF24L01 radio module to communicate
    between two Arduinos with much increased reliability following
@@ -119,7 +119,7 @@ struct DataStruct {
 };
 DataStruct data;
 
-// *** MODIFICATION: Add a "busy" flag for the transmitter ***
+// *** Victor Edits: Add a "busy" flag for the transmitter ***
 bool isTransmitting = false;
 
 void setupRF24Common() {
@@ -217,7 +217,7 @@ void spare2() {}
 
 void rf24SendData() {
 
-  // // *** MODIFICATION: Prevent re-entry if already transmitting ***
+  // // *** Victor Edits: Prevent re-entry if already transmitting ***
   // if (isTransmitting) {
   //   Serial.println(F("Already transmitting, please wait."));
   //   // We can even tell the user on the LCD
@@ -255,7 +255,7 @@ void rf24SendData() {
     lcd.print(totalTransmitFailures);
   }
   
-  // *** MODIFICATION: Clear the "busy" flag when done ***
+  // *** Victor Edits: Clear the "busy" flag when done ***
   // isTransmitting = false;
 }
 
@@ -385,8 +385,8 @@ void clearData() {
 #endif
 
 
-// *** MODIFICATION: Add easy-to-edit variables for crank tuning ***
-// *** MODIFICATION: Renamed servo pin **
+// *** Victor Edits: Add easy-to-edit variables for crank tuning ***
+// *** Victor Edits: Renamed servo pin **
 // This is your "up" or "resting" position. 0 is highest, 180 is lowest.
 const int CRANK_REST_POSITION = 50;
 // This is your "down" or "pulled" position.
@@ -395,7 +395,7 @@ const int CRANK_PULL_POSITION = 130;
 const int crankMoveDelay = 15;   // ms between crank steps
 const int CRANK_SERVO_PIN = 20;  // This is the pin for your crank servo
 
-// MEERA EDITS
+// Meera Edits
 const int NEOPIXELPIN = 17;
 const int NUMPIXELS = 31;
 const int MOTOR_PIN = 8;  // DC motor control pin
@@ -442,11 +442,11 @@ Adafruit_VS1053_FilePlayer musicPlayer = Adafruit_VS1053_FilePlayer(SHIELD_RESET
 // M6 = 17
 
 // Servo motors
-// *** MODIFICATION: Renamed servo object ***
+// *** Victor Edits: Renamed servo object ***
 Servo crank;  // This servo object will control your crank on pin 20
 
 
-// *** MODIFICATION: Add variables for non-blocking crank pull ***
+// *** Victor Edits: Add variables for non-blocking crank pull ***
 bool isCrankPulling = false;                  // True if the pull is in progress
 bool isReturningToRest = false;               // True if on the return trip
 int currentCrankAngle = CRANK_REST_POSITION;  // Current angle of the crank
@@ -510,7 +510,7 @@ void setupMusicMakerShield() {
 }
 
 void setupServoMotors() {
-  // *** MODIFICATION: Use new crank name to attach ***
+  // *** Victor Edits: Use new crank name to attach ***
   crank.attach(CRANK_SERVO_PIN);     // Attaches the servo on pin 20
   crank.write(CRANK_REST_POSITION);  // Sets initial position
   //  antenna.attach(ANTENNA_SERVO_PIN);
@@ -670,7 +670,7 @@ uint32_t Wheel(byte WheelPos) {
 }
 
 // meera edit
-// *** MODIFICATION: Fixed logic in updateCrankPull ***
+// *** Victor Edits: Fixed logic in updateCrankPull ***
 // void updateCrankPull() {
 //   // Only run this code if the crank pull is active
 //   if (!isCrankPulling) {
