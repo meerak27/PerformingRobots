@@ -1,4 +1,4 @@
-![IMG_0774](https://github.com/user-attachments/assets/84163378-2085-45d0-9085-ced25b628f3b)![IMG_0775](https://github.com/user-attachments/assets/63a5cecf-ed66-41a0-afc8-86e00ff30ad0)# Meera AlKhazraji's Journal 
+# Meera AlKhazraji's Journal 
 ## Victor Nadu and I have collaborated on this project from start to finish. 
 
 ### Entry One: Building Robot Height
@@ -128,7 +128,8 @@ We added mounting strip tape to the back of the NeoPixels and wrapped them aroun
 <img src="https://github.com/user-attachments/assets/41b378aa-0113-4977-a44a-b4a8e38727b1" width="300">
 <img src="https://github.com/user-attachments/assets/072c20d7-e115-4e2f-bf2c-fde323104efc" width="300">
 <img src="https://github.com/user-attachments/assets/6a18b077-0908-4a2d-985d-f7153aa4c53b" width="300">
-
+<img src="https://github.com/user-attachments/assets/84163378-2085-45d0-9085-ced25b628f3b" width="300">
+<img src="https://github.com/user-attachments/assets/63a5cecf-ed66-41a0-afc8-86e00ff30ad0" width="300">
 
 We made a cutout in the front of the robot where the reels will eventually sit. I cut a large rectangular opening in the cardboard with enough clearance for the rotating reels to be visible and accessible. Before this, I had already cut several pieces of wood with a completely different mounting idea in mind, but after discussing with Dustin, I quickly realized my original plan would be weak and cause alot of balance issues. The professor and I brainstormed alternative structures, and we decided a shelf design would be more secure. We prototyped on paper, then went to the scene shop to cut the wood planks for the shelf. After cutting the wood to size, I mounted the shelf by attaching three L-brackets to the main vertical wooden plank that runs from the base to the top. I then drilled holes on both sides of the shelf to support the DC motor. This gave us a sturdy base for the motor. To make this easier during testing, I also cut openings on the sides of the front of the cardboard body so the dc motor can easily be taken in and out. 
 During rehearsal the next day, we discovered a major issue: the robot had significant balance problems and was close to tipping over various times. We did not yet have the code or movement fully tuned, so from this point forward we focused a main priority was the robots stability which we will later address on the code and and in the fabrication.
@@ -140,7 +141,7 @@ During rehearsal the next day, we discovered a major issue: the robot had signif
 <img src="https://github.com/user-attachments/assets/cca1b9c2-4223-4e61-95f4-680f138ca075" width="300">
 <img src="https://github.com/user-attachments/assets/28734686-fc81-4c60-bd43-8139a0a61853" width="300">
 <img src="https://github.com/user-attachments/assets/11f878a1-b480-4fc4-96aa-bf82cf46d772" width="300">
- [cases demo]([url](https://drive.google.com/file/d/1NXZ6YmgtkAqCHvUBDg4O09I4oM1MH2kT/view?usp=sharing))
+[cases demo]([url](https://drive.google.com/file/d/1NXZ6YmgtkAqCHvUBDg4O09I4oM1MH2kT/view?usp=sharing))
 
 Because the robot had a ‘top-heavy’ balance and was unstable, we decided to add a second caster wheel on the back. The scene shop was closed, so I used the scraps in the IM lab + the wood planks for the original shelf idea I had to prototype the position. I used clamps to make sure the caster did not touch the ground unless the robot leaned too far back. Once the alignment felt right, I bolted everything down.
 
