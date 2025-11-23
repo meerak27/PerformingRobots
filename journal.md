@@ -162,3 +162,32 @@ We then had rehearsals, we were continuing to troubleshoot the robot balance bef
 We planned the decoration for the reels and initially ordered glitter paper to cover them. The size was wrong, so we attempted another solution, but we were not happy with how it looked when the reels were still. We will test how it appears while spinning and decide whether to redo it after seeing it in motion. We also designed fifteen unique symbols for the reels using AI. Each reel will have five symbols. We are turning these designs into holographic stickers so they can stand out on stage. The stickers should be ready on Monday.
 
 We also finalized the robot’s voice and generated much more spoken lines. We also added the initial DC motor code to run the reels to tested that all is finally working as it should be with it.  The remaining tasks are to write the final integrated code with all the cases (which we now know hwo to do, we just need to address the power issue), turn all script lines into text-to-speech, stick the symbols to the reels, adjust the decoration on the reels and the robots exterior.
+
+### Entry Twelve: Coding the Cases and Preparing the Reels
+### November 18-19
+<img src="https://github.com/user-attachments/assets/962b1e08-6cef-4660-868c-505920574851" width="300">
+<img src="https://github.com/user-attachments/assets/dfc4cc39-5b01-4a71-9257-2867c83156dd" width="300">
+<img src="https://github.com/user-attachments/assets/53fced43-b1c7-4d52-8cc3-91c67c093e9e" width="300">
+
+At this stage, we had the code for the cases and the dialogue lines [completed]([url](https://youtu.be/KqF-X0SrsKw)), and we were happy with how everything was flowing. The motor and reels were not yet connected to the robot because we were still unhappy with the look of the reels and the speed, which we planned to address later. At this point the holographic stickers for the reels arrived and we found all the wallpaper we need to decorate the robot. We decided on a fake wood looking sticker for the side and a shiny silver for the front while the reels will be a shiny pink. 
+
+During this stage, we also ran into a few issues while setting up the cases. The NeoPixels drew a lot of power, which caused the servo motor to jerk randomly. To reduce the load and prevent constant shaking, we added the attach–detach logic so the servo only activates when needed. Since the servo kept jerking, we also worked on making the physical attachment between the crank mechanism and the servo horn sturdier so the structure would be more durable. We continued refining both the code and the structure, aiming to keep the overall movement smooth and consistent.
+
+
+### Entry Thirteen: Re-Cutting the Reels and Adding the Faster Motor
+### November 21
+<img src="https://github.com/user-attachments/assets/8897d771-c1e3-4755-901a-86d67774ced3" width="300">
+<img src="https://github.com/user-attachments/assets/295301c7-f52c-44b7-a5b7-7d464c25379d" width="300">
+<img src="https://github.com/user-attachments/assets/f91f4b0c-6019-4380-ad30-d69926599d57" width="300">
+
+Because we were not satisfied with how the reels looked, we decided to laser cut them again and rebuild the structure. We also wanted a quicker motor, so we got a faster one and attached it. The new motor was much larger than expected, which caused sizing issues, but we resolved it by making a cutout on the side of the robot and deciding that we would cover it late. 
+
+Around this time, we also faced issues with the audio not playing properly and with the transmitter. The professor is working on a fix for the audio problem. We believe we have addressed the transmitter issue, but both areas will require further testing before we can be certain everything is stable. 
+
+### Entry Fourteen: Robot Progress Update
+### November 23
+From the list of the five remaining items: the audio issue, decoration, drum, faster motor, and wire management. Over the weekend we reprinted the drums as planned and attached them to the rod, and the motor issue was solved by switching to the faster motor. Wire management should not be a major concern since zip ties were our best-friends as we worked.
+
+The two remaining tasks are the audio issue and the decoration. On Monday, we will correct the sizing of the drums then decorate it. On Wednesday, we will decorate the full robot. We already have all the materials we need, but because the robot is very tall and requires two people to work on it, Wednesday is the only day we are both available. We still need to finalize the audio issue, but since we think the transmitter problem has been solved, we will test the audio system again and see how it behaves on Monday or Tuesday. 
+
+We also adjusted our code for the wheels as we were happy with the smoothness but the backwards movement still slightly jerked so we will have to test that out, which we will do on Monday. As well, after the rehearsal we realized we dont have enough stage time so we will adjust the scene where the attorneys clash on Monday. The whole class agreed to have about 14-15 lines per character so we will discuss with the wifes attorney team (ghader and mustafa) to decide hwo best to remake the sccene and consider either making it a clash or a conversation.    
