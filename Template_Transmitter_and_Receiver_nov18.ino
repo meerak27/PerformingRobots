@@ -1,7 +1,7 @@
 // Meera Al Khazraji & Vicor Nadu
 // Professor Micheal Shiloh
 // Performing Robots Fall '25
-// Template of this code was taken from Professor Shiloh. We have attempted to mark all edits as we go along, but we will undoubtedly miss some.
+
 /*
    Using the nRF24L01 radio module to communicate
    between two Arduinos with much increased reliability following
@@ -48,7 +48,6 @@
                      Made crank positions easy to edit.
 */
 
-
 // Common code
 //
 
@@ -66,11 +65,11 @@
 
 // CHANGEHERE
 // For the transmitter
-// const int NRF_CE_PIN = A4, NRF_CSN_PIN = A5;
+const int NRF_CE_PIN = A4, NRF_CSN_PIN = A5;
 
 // CHANGEHERE
 // for the receiver
-const int NRF_CE_PIN = A11, NRF_CSN_PIN = A15;
+//const int NRF_CE_PIN = A11, NRF_CSN_PIN = A15;
 
 // nRF 24L01 pin   name
 //          1      GND
@@ -92,17 +91,17 @@ RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);  // CE, CSN
 //
 
 // Channel and address allocation:
-// Rama and Hind Y: Channel 30, addr = 0x76
-// Ahsen and Pranav: Channel 40, addr = 0x73
-// Sara & Toomie:  Channel 50, addr = 0x7C
-// Avinash and Vahagn: Channel 60, addr = 0xC6
-// Hind A & Javeria:  Channel 70, addr = 0xC3
-// Mbebo and Aaron: Channel 80, addr = 0xCC
-// Linh and Luke: Channel 90, addr = 0x33
+// Torico and Sarah: Channel 30, addr = 0x76
+// Sudiksha and Aysha: Channel 40, addr = 0x73
+// Mariam and Joy:  Channel 50, addr = 0x7C
+// Ghadir and Mustafa: Channel 60, addr = 0xC6
+// Clara and Jiho:  Channel 70, addr = 0xC3
+// Victor and Meera: Channel 80, addr = 0xCC
+// Ali and Hari: Channel 90, addr = 0x33
 
 // CHANGEHERE
-const byte CUSTOM_ADDRESS_BYTE = 0xCC;  // change as per the above assignment
 const int CUSTOM_CHANNEL_NUMBER = 80;   // change as per the above assignment
+const byte CUSTOM_ADDRESS_BYTE = 0xCC;  // change as per the above assignment
 
 // Do not make changes here
 const byte xmtrAddress[] = { CUSTOM_ADDRESS_BYTE, CUSTOM_ADDRESS_BYTE, 0xC7, 0xE6, 0xCC };
@@ -119,10 +118,8 @@ struct DataStruct {
 };
 DataStruct data;
 
-// *** Victor Edits: Add a "busy" flag for the transmitter ***
-bool isTransmitting = false;
-
 void setupRF24Common() {
+
   // RF24 setup
   if (!radio.begin()) {
     Serial.println(F("radio  initialization failed"));
@@ -137,12 +134,9 @@ void setupRF24Common() {
   radio.setPALevel(RF24_POWER_LEVEL);
 }
 
+
 // CHANGEHERE
-
-/*
-
 // Transmitter code
-
 
 // Transmitter pin usage
 const int LCD_RS_PIN = 3, LCD_EN_PIN = 2, LCD_D4_PIN = 4, LCD_D5_PIN = 5, LCD_D6_PIN = 6, LCD_D7_PIN = 7;
@@ -153,6 +147,7 @@ const int SW1_PIN = 8, SW2_PIN = 9, SW3_PIN = 10, SW4_PIN = A3, SW5_PIN = A2;
 
 // initialize the library with the relevant pins
 LiquidCrystal lcd(LCD_RS_PIN, LCD_EN_PIN, LCD_D4_PIN, LCD_D5_PIN, LCD_D6_PIN, LCD_D7_PIN);
+
 
 // MEERA EDIT
 const int NUM_OF_STATES = 32;
@@ -191,10 +186,12 @@ char* theStates[] = {
   "Scene 5.12",
   "Scene 5.13",
   "Scene 5.14",
-  "Scene 5.15"
+  "Scene 5.15",
 };
 
+
 void updateLCD() {
+
   lcd.clear();
   lcd.print(theStates[data.stateNumber]);
   lcd.setCursor(0, 1);  // column, line (from 0)
@@ -212,27 +209,21 @@ void countUp() {
   }
   updateLCD();
 }
+
+
 void spare1() {}
 void spare2() {}
 
 void rf24SendData() {
 
-  // // *** Victor Edits: Prevent re-entry if already transmitting ***
-  // if (isTransmitting) {
-  //   Serial.println(F("Already transmitting, please wait."));
-  //   // We can even tell the user on the LCD
-  //   lcd.setCursor(0, 1);
-  //   lcd.print("Busy...         ");
-  //   return; // Exit the function immediately
-  // }
-  // isTransmitting = true; // Set the flag so we can't run again
-
   radio.stopListening();  // go into transmit mode
   // The write() function will block
   // until the message is successfully acknowledged by the receiver
   // or the timeout/retransmit maxima are reached.
+  // Returns 1 if write succeeds
+  // Returns 0 if errors occurred (timeout or FAILURE_HANDLING fails)
   int retval = radio.write(&data, sizeof(data));
-
+  
   lcd.clear();
   lcd.setCursor(0, 0);  // column, line (from 0)
   lcd.print("transmitting");
@@ -254,9 +245,6 @@ void rf24SendData() {
     lcd.setCursor(13, 1);  // column, line (from 0)
     lcd.print(totalTransmitFailures);
   }
-  
-  // *** Victor Edits: Clear the "busy" flag when done ***
-  // isTransmitting = false;
 }
 
 class Button {
@@ -295,6 +283,14 @@ Button theButtons[] = {
 };
 
 void setupRF24() {
+
+  // Check whether the correct pins are assigned
+  if ( NRF_CE_PIN != A4 || NRF_CSN_PIN != A5)
+  {
+    Serial.println(F("The wrong NRF_CE_PIN and NRF_CSN_PIN pins are defined for a transmitter"));
+    while (1);
+  }
+
   setupRF24Common();
 
   // Set us as a transmitter
@@ -303,6 +299,7 @@ void setupRF24() {
 
   // radio.printPrettyDetails();
   Serial.println(F("I am a transmitter"));
+
   data.stateNumber = 0;
 }
 
@@ -347,12 +344,14 @@ void setup() {
 }
 
 
+
 void loop() {
   for (int i = 0; i < NUMBUTTONS; i++) {
     theButtons[i].update();
   }
   delay(50);  // for testing
 }
+
 
 void clearData() {
   // set all fields to 0
@@ -362,7 +361,8 @@ void clearData() {
 // End of transmitter code
 // CHANGEHERE
 
-*/
+
+/*
 
 // Receiver Code
 // CHANGEHERE
@@ -385,8 +385,8 @@ void clearData() {
 #endif
 
 
-// *** Victor Edits: Add easy-to-edit variables for crank tuning ***
-// *** Victor Edits: Renamed servo pin **
+// *** MODIFICATION: Add easy-to-edit variables for crank tuning ***
+// *** MODIFICATION: Renamed servo pin **
 // This is your "up" or "resting" position. 0 is highest, 180 is lowest.
 const int CRANK_REST_POSITION = 50;
 // This is your "down" or "pulled" position.
@@ -395,7 +395,7 @@ const int CRANK_PULL_POSITION = 130;
 const int crankMoveDelay = 15;   // ms between crank steps
 const int CRANK_SERVO_PIN = 20;  // This is the pin for your crank servo
 
-// Meera Edits
+// MEERA EDITS
 const int NEOPIXELPIN = 17;
 const int NUMPIXELS = 31;
 const int MOTOR_PIN = 8;  // DC motor control pin
@@ -442,11 +442,11 @@ Adafruit_VS1053_FilePlayer musicPlayer = Adafruit_VS1053_FilePlayer(SHIELD_RESET
 // M6 = 17
 
 // Servo motors
-// *** Victor Edits: Renamed servo object ***
+// *** MODIFICATION: Renamed servo object ***
 Servo crank;  // This servo object will control your crank on pin 20
 
 
-// *** Victor Edits: Add variables for non-blocking crank pull ***
+// *** MODIFICATION: Add variables for non-blocking crank pull ***
 bool isCrankPulling = false;                  // True if the pull is in progress
 bool isReturningToRest = false;               // True if on the return trip
 int currentCrankAngle = CRANK_REST_POSITION;  // Current angle of the crank
@@ -510,7 +510,7 @@ void setupMusicMakerShield() {
 }
 
 void setupServoMotors() {
-  // *** Victor Edits: Use new crank name to attach ***
+  // *** MODIFICATION: Use new crank name to attach ***
   crank.attach(CRANK_SERVO_PIN);     // Attaches the servo on pin 20
   crank.write(CRANK_REST_POSITION);  // Sets initial position
   //  antenna.attach(ANTENNA_SERVO_PIN);
@@ -670,7 +670,7 @@ uint32_t Wheel(byte WheelPos) {
 }
 
 // meera edit
-// *** Victor Edits: Fixed logic in updateCrankPull ***
+// *** MODIFICATION: Fixed logic in updateCrankPull ***
 // void updateCrankPull() {
 //   // Only run this code if the crank pull is active
 //   if (!isCrankPulling) {
@@ -753,21 +753,24 @@ void loop() {
         isBreathing = true;
         breathingBrightness = 0;
         breathingDirection = 1;
-        musicPlayer.playFullFile("/track001.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track001.mp3");
         break;
 
       case 1:  // "That's my client. Faithful as a coin toss..."
         Serial.println(F("Gold - Money colors"));
         if (crank.attached()) crank.detach();
         setColor(255, 200, 0);  // Gold
-        musicPlayer.playFullFile("/track002.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track002.mp3");
         break;
 
       case 2:  // "Over there, the wife..."
         Serial.println(F("Icy White - Clinical"));
         if (crank.attached()) crank.detach();
         setColor(255, 255, 255);  // White
-        musicPlayer.playFullFile("/track003.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track003.mp3");
         break;
 
       case 3:  // "Poor kiddo, paternity is a jackpot..."
@@ -783,7 +786,8 @@ void loop() {
         }
         currentCrankAngle = CRANK_REST_POSITION;
         lastCrankMoveTime = millis();
-        musicPlayer.playFullFile("/track004.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track004.mp3");
         break;
 
       case 4:  // "Flexible in every sense..."
@@ -792,21 +796,24 @@ void loop() {
         isPulsing = true;
         breathingBrightness = 255;
         breathingDirection = -1;
-        musicPlayer.playFullFile("/track005.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track005.mp3");
         break;
 
       case 5:  // "Saulbot or something..."
         Serial.println(F("Green - Mockery"));
         if (crank.attached()) crank.detach();
         setColor(0, 255, 0);  // Green
-        musicPlayer.playFullFile("/track006.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile ("/track006.mp3");
         break;
 
       case 6:  // "Our judge. Calm, composed..."
         Serial.println(F("Royal Blue - Respect"));
         if (crank.attached()) crank.detach();
         setColor(0, 0, 200);  // Royal blue
-        musicPlayer.playFullFile("/track007.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile ("/track007.mp3");
         break;
 
       case 7:  // "This one's going to be fun."
@@ -825,14 +832,16 @@ void loop() {
         }
         currentCrankAngle = CRANK_REST_POSITION;
         lastCrankMoveTime = millis();
-        musicPlayer.playFullFile("/track008.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track008.mp3");
         break;
 
       case 8:  // "I can smell the deposit fees."
         Serial.println(F("Gold Sparkle - $$$"));
         if (crank.attached()) crank.detach();
         isSparkle = true;
-        musicPlayer.playFullFile("/track009.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track009.mp3");
         break;
 
         // ===== SCENE 3 =====
@@ -841,7 +850,8 @@ void loop() {
         Serial.println(F("Orange - Word games"));
         if (crank.attached()) crank.detach();
         setColor(255, 100, 0);  // Orange
-        musicPlayer.playFullFile("/track010.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track010.mp3");
         break;
 
       case 10:  // "Like your wife's best friend..."
@@ -850,7 +860,8 @@ void loop() {
         isPulsing = true;
         breathingBrightness = 255;
         breathingDirection = -1;
-        musicPlayer.playFullFile("/track011.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track011.mp3");
         break;
 
       case 11:  // "Relax, I'm on your side..."
@@ -859,7 +870,8 @@ void loop() {
         isBreathing = true;
         breathingBrightness = 0;
         breathingDirection = 1;
-        musicPlayer.playFullFile("/track012.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track012.mp3");
         break;
 
       case 12:  // "It's not a crime to dance..."
@@ -873,7 +885,8 @@ void loop() {
           }
         }
         strip.show();
-        musicPlayer.playFullFile("/track013.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track013.mp3");
         break;
 
       case 13:  // "Let's make her pay..."
@@ -891,7 +904,8 @@ void loop() {
         }
         currentCrankAngle = CRANK_REST_POSITION;
         lastCrankMoveTime = millis();
-        musicPlayer.playFullFile("/track014.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track014.mp3");
         break;
 
       case 14:  // "Play the victim..."
@@ -907,14 +921,16 @@ void loop() {
         }
         currentCrankAngle = CRANK_REST_POSITION;
         lastCrankMoveTime = millis();
-        musicPlayer.playFullFile("/track015.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track015.mp3");
         break;
 
       case 15:  // "Kid's got a sense of humor."
         Serial.println(F("Cyan - Amused"));
         if (crank.attached()) crank.detach();
         setColor(0, 255, 255);  // Cyan
-        musicPlayer.playFullFile("/track016.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track016.mp3");
         break;
 
       case 16:  // "Regret sells better than guilt."
@@ -937,7 +953,8 @@ void loop() {
         }
         currentCrankAngle = CRANK_REST_POSITION;
         lastCrankMoveTime = millis();
-        musicPlayer.playFullFile("/track017.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track017.mp3");
         break;
 
         // ===== SCENE 5 - COURTROOM =====
@@ -957,14 +974,16 @@ void loop() {
         }
         currentCrankAngle = CRANK_REST_POSITION;
         lastCrankMoveTime = millis();
-        musicPlayer.playFullFile("/track018.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track018.mp3");
         break;
 
       case 18:  // "Sure, he danced..."
         Serial.println(F("Orange - Dismissive"));
         if (crank.attached()) crank.detach();
         setColor(255, 100, 0);  // Orange
-        musicPlayer.playFullFile("/track019.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track019.mp3");
         break;
 
       case 19:  // "Vegas casino at midnight"
@@ -978,7 +997,8 @@ void loop() {
           }
         }
         strip.show();
-        musicPlayer.playFullFile("/track020.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track020.mp3");
         break;
 
       case 20:  // "Opposing counsel Saulbot..."
@@ -987,7 +1007,8 @@ void loop() {
         isPulsing = true;
         breathingBrightness = 255;
         breathingDirection = -1;
-        musicPlayer.playFullFile("/track021.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track021.mp3");
         break;
 
       case 21:  // "Preacher on Sunday, bachelor on Friday"
@@ -996,7 +1017,8 @@ void loop() {
         delay(300);
         setColor(100, 255, 100);  // Pink (GRB)
         if (crank.attached()) crank.detach();
-        musicPlayer.playFullFile("/track022.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track022.mp3");
         break;
 
       case 22:  // "Harassment claims alphabetically"
@@ -1012,7 +1034,8 @@ void loop() {
         }
         currentCrankAngle = CRANK_REST_POSITION;
         lastCrankMoveTime = millis();
-        musicPlayer.playFullFile("/track023.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track023.mp3");
         break;
 
       case 23:  // "Your Honor, I trust your judgment..."
@@ -1021,49 +1044,56 @@ void loop() {
         isBreathing = true;
         breathingBrightness = 0;
         breathingDirection = 1;
-        musicPlayer.playFullFile("/track024.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track024.mp3");
         break;
 
       case 24:  // "A bit of dancing, a lot of exaggeration..."
         Serial.println(F("Soft Purple - Reasonable"));
         if (crank.attached()) crank.detach();
         setColor(0, 100, 100);  // Soft purple (GRB)
-        musicPlayer.playFullFile("/track025.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track025.mp3");
         break;
 
       case 25:  // "Now, tell us, kid..."
         Serial.println(F("Yellow - Interrogation"));
         if (crank.attached()) crank.detach();
         setColor(255, 255, 0);  // Yellow
-        musicPlayer.playFullFile("/track026.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track026.mp3");
         break;
 
       case 26:  // "Did your father look like..."
         Serial.println(F("Gentle Blue - Leading question"));
         if (crank.attached()) crank.detach();
         setColor(150, 100, 255);  // Gentle blue (GRB)
-        musicPlayer.playFullFile("/track027.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track027.mp3");
         break;
 
       case 27:  // "What would you say your father was thinking?"
         Serial.println(F("Teal - Probing"));
         if (crank.attached()) crank.detach();
         setColor(0, 200, 150);  // Teal (GRB - swapped)
-        musicPlayer.playFullFile("/track028.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track028.mp3");
         break;
 
       case 28:  // "Kids say the darndest things..."
         Serial.println(F("Nervous Orange Flicker"));
         if (crank.attached()) crank.detach();
         isSparkle = true;
-        musicPlayer.playFullFile("/track029.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track029.mp3");
         break;
 
       case 29:  // "If you had to choose..."
         Serial.println(F("Dark Red - The trap"));
         if (crank.attached()) crank.detach();
         setColor(0, 150, 0);  // Dark red (GRB)
-        musicPlayer.playFullFile("/track030.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track030.mp3");
         break;
 
       case 30:  // "But I meant between your mother and father."
@@ -1077,7 +1107,8 @@ void loop() {
           }
         }
         strip.show();
-        musicPlayer.playFullFile("/track031.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track031.mp3");
         break;
 
       case 31:  // "JACKPOT!"
@@ -1104,7 +1135,8 @@ void loop() {
         }
         currentCrankAngle = CRANK_REST_POSITION;
         lastCrankMoveTime = millis();
-        musicPlayer.playFullFile("/track032.mp3");
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track032.mp3");
         break;
 
       default:
@@ -1118,6 +1150,7 @@ void loop() {
 // end of loop()
 // end of receiver code
 // CHANGEHERE
+*/
 
 
 // Uncomment this to activate the receiver code
