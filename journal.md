@@ -200,3 +200,22 @@ We also adjusted our code for the wheels as we were happy with the smoothness bu
 <img src="https://github.com/user-attachments/assets/100101c7-e421-423f-bd00-e6cdb31ed0b6" width="300">
 We spent this session redecorating the reels and drilling new holes in the shelf to accommodate the updated structure. Decorating the reels took much longer than expected, but as we continued working, we found a method that made the process more consistent and manageable. By the end, we were happy with how they looked, it honestly wasn't perfect, but we realized this is the best we would be able to get, and we are okay with the imperfections for now. When we went to attach the decorated reels to the bracket connected to the motor, the fit was incorrect. We removed the bracket, and then reattached it to the shelf. After powering the system, [only the motor was working (see demo]([url](https://youtu.be/QX0EPyKBajg)), while the reels themselves did not move. We will troubleshoot and find a solution next session with the professor.
 Aside from the mechanical work, I also updated Scene 3 to improve the flow and give the robot more lines. With the updated script, we now need to recode the cases and regenerate the corresponding audio before Thursdays rehearsal.
+
+### Entry Sixteen: Decoration and Reinforcement
+### November 25
+<img src="https://github.com/user-attachments/assets/063e4805-d750-4a73-985d-87efc6142fdf" width="300">
+<img src="https://github.com/user-attachments/assets/9a6eb497-3917-4f62-b944-13c6ee2fe3ad" width="300">
+<img src="https://github.com/user-attachments/assets/e42b711d-32a3-44d6-b931-15303161b208" width="300">
+<img src="https://github.com/user-attachments/assets/f93963c0-80bf-4d54-9b2e-460a6ea7451c" width="300">
+<img src="https://github.com/user-attachments/assets/8a4eca88-9ff6-4cb4-884d-78764f4eaf13" width="300">
+In this session, we focused on decorating the sides and the front of the robot. For the sides, we used a black wood-pattern material, and for the front we used a shiny silver one. We peeled and stuck everything into place, but we intentionally left the top half of the right section undecorated. That area holds the motor, and since we still need to address the motor issue, we decided to keep it as cardboard for now so we do not create extra trouble cutting through decoration later.
+
+During rehearsals, we also noticed a stability problem with the top section of the robot. The NeoPixel housing sits on top of a piece of wood mounted onto the cardboard, and the entire structure was heavier than expected. It was not reinforced as well as it needed to be, so it would sometimes wobble. We prepared to strengthen it using cardboard gussets, but then realized we had a few leftover wood blocks from prototyping. One of them was almost the perfect length, so we used L-brackets to attach it directly to the tall vertical plank of wood that gives the robot its height. We then used wood glue to secure the block against the cardboard. This made the top significantly more stable, and we felt much more comfortable with its structure.
+
+We also revisited the audio issue. The professor suggested a fix: ensure the music maker shield is not playing anything before triggering a new file. If it is playing, stop it first, and then play the next file. After adding that to the code, the audio issue disappeared [(see demo)]([url](https://youtube.com/shorts/QVTzN6wfbb0)). We will continue testing and testing this to ensure it doesn't randomly appear again, but it should be okay for now. 
+
+### Entry Seventeen: Cases and Script
+### November 26
+Today we finalized our play script and made sure we were fully happy with the lines. We generated all the audio files and wrote the updated code and cases to match the finalized dialogue. In tomorrow’s rehearsal, we plan to test everything together, make sure the flow feels right, and then adjust the colors, timing, tones, or any other details that need refinement. We also hope to have some time to addresss the motor issue tomorrow. 
+
+
