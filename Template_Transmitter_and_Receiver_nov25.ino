@@ -150,48 +150,58 @@ LiquidCrystal lcd(LCD_RS_PIN, LCD_EN_PIN, LCD_D4_PIN, LCD_D5_PIN, LCD_D6_PIN, LC
 
 
 // MEERA EDIT
-const int NUM_OF_STATES = 32;
+const int NUM_OF_STATES = 38;
 char* theStates[] = {
-  // Scene 1 (Tracks 1–9)
-  "Scene 1.1",
-  "Scene 1.2",
-  "Scene 1.3",
-  "Scene 1.4",
-  "Scene 1.5",
-  "Scene 1.6",
-  "Scene 1.7",
-  "Scene 1.8",
-  "Scene 1.9",
-  // Scene 3 (Tracks 10–17)
-  "Scene 3.1",
-  "Scene 3.2",
-  "Scene 3.3",
-  "Scene 3.4",
-  "Scene 3.5",
-  "Scene 3.6",
-  "Scene 3.7",
-  "Scene 3.8",
-  // Scene 5 (Tracks 18–32)
-  "Scene 5.1",
-  "Scene 5.2",
-  "Scene 5.3",
-  "Scene 5.4",
-  "Scene 5.5",
-  "Scene 5.6",
-  "Scene 5.7",
-  "Scene 5.8",
-  "Scene 5.9",
-  "Scene 5.10",
-  "Scene 5.11",
-  "Scene 5.12",
-  "Scene 5.13",
-  "Scene 5.14",
-  "Scene 5.15",
+  // 0–8  : Scene 1 – Opening Aside (Tracks 001–009)
+  "Well, that didn't",        // 0 - Track001
+  "Faithful as a coin",       // 1 - Track002
+  "Over there, the wife",     // 2 - Track003
+  "Paternity is a jackpot",   // 3 - Track004
+  "Flexible in every sense",  // 4 - Track005
+  "Saulbot or something",     // 5 - Track006
+  "Presiding is our judge",   // 6 - Track007
+  "This one's going to be",   // 7 - Track008
+  "Tension, deposit fees",    // 8 - Track009
+  // 9–17 : Scene 3 – Banter (Tracks 010–018)
+  "I walk with confidence",     // 9  - Track010
+  "Drama like a side",          // 10 - Track011
+  "Slot machines communicate",  // 11 - Track012
+  "Plays dignity like coupon",  // 12 - Track013
+  "Play the house better",      // 13 - Track014
+  "Only sane ones here",        // 14 - Track015
+  "So what's your angle",       // 15 - Track016
+  "Consistently pathetic",      // 16 - Track017
+  "I think they mean",          // 17 - Track018
+  // 18–19 : Scene 3 – Beat with Child / Resolve (Tracks 019–020)
+  "We need to win",           // 18 - Track019
+  "I'll save that pleasure",  // 19 - Track020
+  // 20–27 : Scene 5 – Court Monologue (Tracks 021–028)
+  "Casanova with rap sheet",   // 20 - Track021
+  "Sure, he danced",           // 21 - Track022
+  "That house like Vegas",     // 22 - Track023
+  "Saulbot, downfall of civ",  // 23 - Track024
+  "Preacher on Sunday",        // 24 - Track025
+  "Harassment claims A to Z",  // 25 - Track026
+  "I trust your judgment",     // 26 - Track027
+  "Same damn thing",           // 27 - Track028
+  // 28–33 : Child Questioning (Tracks 029–034)
+  "Now, tell us kid",           // 28 - Track029
+  "Betraying or just dancing",  // 29 - Track030
+  "What was father thinking",   // 30 - Track031
+  "Kids say darndest things",   // 31 - Track032
+  "Who's the better parent",    // 32 - Track033
+  "Between mother and father",  // 33 - Track034
+  // 34–35 : Jackpot / Panic (Tracks 035–036)
+  "JACKPOT!",             // 34 - Track035
+  "Most lucrative case",  // 35 - Track036
+  // 36 : Listening mode (no audio just neos)
+  "LISTENING mode",  // 36 - SW4 state
+  "IDLE mode",       // 37 - SW5 state (new idle/default)
+
 };
 
 
 void updateLCD() {
-
   lcd.clear();
   lcd.print(theStates[data.stateNumber]);
   lcd.setCursor(0, 1);  // column, line (from 0)
@@ -210,9 +220,16 @@ void countUp() {
   updateLCD();
 }
 
-
-void spare1() {}
-void spare2() {}
+void spare1() {
+  data.stateNumber = 36;  // jump to LISTENING mode
+  updateLCD();            // show it on the screen
+  rf24SendData();
+}
+void spare2() {
+  data.stateNumber = 37;  // jump to IDLE mode
+  updateLCD();
+  rf24SendData();
+}
 
 void rf24SendData() {
 
@@ -223,7 +240,7 @@ void rf24SendData() {
   // Returns 1 if write succeeds
   // Returns 0 if errors occurred (timeout or FAILURE_HANDLING fails)
   int retval = radio.write(&data, sizeof(data));
-  
+
   lcd.clear();
   lcd.setCursor(0, 0);  // column, line (from 0)
   lcd.print("transmitting");
@@ -285,10 +302,10 @@ Button theButtons[] = {
 void setupRF24() {
 
   // Check whether the correct pins are assigned
-  if ( NRF_CE_PIN != A4 || NRF_CSN_PIN != A5)
-  {
+  if (NRF_CE_PIN != A4 || NRF_CSN_PIN != A5) {
     Serial.println(F("The wrong NRF_CE_PIN and NRF_CSN_PIN pins are defined for a transmitter"));
-    while (1);
+    while (1)
+      ;
   }
 
   setupRF24Common();
@@ -387,9 +404,9 @@ void clearData() {
 
 // *** MODIFICATION: Add easy-to-edit variables for crank tuning ***
 // *** MODIFICATION: Renamed servo pin **
-// This is your "up" or "resting" position. 0 is highest, 180 is lowest.
+// This is  "up" or "resting" position. 0 is highest, 180 is lowest.
 const int CRANK_REST_POSITION = 50;
-// This is your "down" or "pulled" position.
+// This is "down" or "pulled" position.
 const int CRANK_PULL_POSITION = 130;
 // This controls the speed. Smaller number = faster.
 const int crankMoveDelay = 15;   // ms between crank steps
@@ -398,7 +415,13 @@ const int CRANK_SERVO_PIN = 20;  // This is the pin for your crank servo
 // MEERA EDITS
 const int NEOPIXELPIN = 17;
 const int NUMPIXELS = 31;
-const int MOTOR_PIN = 8;  // DC motor control pin
+const int MOTOR_PIN = 8;        // DC motor control pin
+const int MOTOR_OFF = 0;        // Stopped
+const int MOTOR_IDLE = 100;     // Slow, calm ~40% speed
+const int MOTOR_NORMAL = 150;   // Regular speed ~60%
+const int MOTOR_SLEAZY = 180;   // Medium-fast ~70%
+const int MOTOR_EXCITED = 220;  // Fast, energetic ~85%
+const int MOTOR_ANGRY = 255;    // Maximum speed 100%
 bool isFlashingRed = false;
 unsigned long redFlashStartTime = 0;
 const unsigned long RED_FLASH_DURATION = 4500;
@@ -406,6 +429,13 @@ bool isFlashingRainbow = false;
 bool isBreathing = false;
 bool isPulsing = false;
 bool isSparkle = false;
+bool isWaving = false;
+bool isStrobing = false;
+bool isAlternating = false;
+unsigned long lastWaveUpdate = 0;
+int wavePosition = 0;
+uint8_t wave_r1 = 0, wave_g1 = 0, wave_b1 = 0;
+uint8_t wave_r2 = 0, wave_g2 = 0, wave_b2 = 0;
 unsigned long lastEffectUpdate = 0;
 int breathingBrightness = 0;
 int breathingDirection = 1;
@@ -426,7 +456,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, NEOPIN, NEO_GRB + NEO_KHZ800
 #define SHIELD_RESET -1  // VS1053 reset pin (unused!)
 #define SHIELD_CS 7      // VS1053 chip select pin (output)
 #define SHIELD_DCS 6     // VS1053 Data/command select pin (output)
-#define CARDCS 4         // Card chip select pin
+#define CARDCS 4         // Card chip select pin \
                          // // DREQ should be an Int pin, see http://arduino.cc/en/Reference/attachInterrupt
 #define DREQ 3           // VS1053 Data request, ideally an Interrupt pin
 Adafruit_VS1053_FilePlayer musicPlayer = Adafruit_VS1053_FilePlayer(SHIELD_RESET, SHIELD_CS, SHIELD_DCS, DREQ, CARDCS);
@@ -510,14 +540,8 @@ void setupMusicMakerShield() {
 }
 
 void setupServoMotors() {
-  // *** MODIFICATION: Use new crank name to attach ***
   crank.attach(CRANK_SERVO_PIN);     // Attaches the servo on pin 20
   crank.write(CRANK_REST_POSITION);  // Sets initial position
-  //  antenna.attach(ANTENNA_SERVO_PIN);
-  //  tail.attach(TAIL_SERVO_PIN);
-  //  grabber.attach(GRABBER_SERVO_PIN);
-  //
-  //  tail.write(TAIL_HAPPY);
 }
 
 
@@ -655,6 +679,73 @@ void updateSparkle(uint8_t r, uint8_t g, uint8_t b) {
   }
 }
 
+// Helper function for wave effect (flows across strip)
+void updateWave(uint8_t r1, uint8_t g1, uint8_t b1, uint8_t r2, uint8_t g2, uint8_t b2) {
+  if (!isWaving) return;
+
+  if (millis() - lastWaveUpdate >= 50) {
+    lastWaveUpdate = millis();
+
+    for (int i = 0; i < strip.numPixels(); i++) {
+      int offset = (i + wavePosition) % strip.numPixels();
+      if (offset < strip.numPixels() / 2) {
+        strip.setPixelColor(i, strip.Color(g1, r1, b1));  // GRB
+      } else {
+        strip.setPixelColor(i, strip.Color(g2, r2, b2));  // GRB
+      }
+    }
+    strip.show();
+    wavePosition = (wavePosition + 1) % strip.numPixels();
+  }
+}
+
+// Helper function for strobing effect
+void updateStrobe(uint8_t r, uint8_t g, uint8_t b) {
+  if (!isStrobing) return;
+
+  if (millis() - lastEffectUpdate >= 150) {
+    lastEffectUpdate = millis();
+
+    static bool strobeOn = false;
+    strobeOn = !strobeOn;
+
+    if (strobeOn) {
+      setColor(r, g, b);
+    } else {
+      setColor(0, 0, 0);
+    }
+  }
+}
+
+// Motor helper funcs
+void setMotorSpeed(int speed) {
+  analogWrite(MOTOR_PIN, speed);
+}
+
+void stopMotor() {
+  analogWrite(MOTOR_PIN, 0);
+}
+
+// Helper function for alternating effect
+void updateAlternating(uint8_t r1, uint8_t g1, uint8_t b1, uint8_t r2, uint8_t g2, uint8_t b2) {
+  if (!isAlternating) return;
+
+  if (millis() - lastEffectUpdate >= 300) {
+    lastEffectUpdate = millis();
+
+    static bool toggle = false;
+    toggle = !toggle;
+
+    for (int i = 0; i < strip.numPixels(); i++) {
+      if ((i % 2 == 0) == toggle) {
+        strip.setPixelColor(i, strip.Color(g1, r1, b1));  // GRB
+      } else {
+        strip.setPixelColor(i, strip.Color(g2, r2, b2));  // GRB
+      }
+    }
+    strip.show();
+  }
+}
 uint32_t Wheel(byte WheelPos) {
   WheelPos = 255 - WheelPos;
   if (WheelPos < 85) {
@@ -718,10 +809,12 @@ void loop() {
   updateCrankPull();
   updateRedFlash();
   updateRainbowEffect();
-  // Add effect updates
-  updateBreathing(128, 0, 128);  // Purple breathing - adjust colors per case
-  updatePulsing(255, 0, 100);    // Pink pulsing - adjust per case
-  updateSparkle(255, 200, 0);    // Gold sparkle - adjust per case
+  updateBreathing(128, 0, 128);
+  updatePulsing(255, 0, 100);
+  updateSparkle(255, 200, 0);
+  updateWave(wave_r1, wave_g1, wave_b1, wave_r2, wave_g2, wave_b2);
+  updateStrobe(255, 0, 0);
+  updateAlternating(255, 200, 0, 255, 100, 0);  // Yellow/Orange for listening
 
   radio.startListening();
   if (radio.available(&pipeNum)) {
@@ -730,413 +823,511 @@ void loop() {
     Serial.print(data.stateNumber);
     Serial.println();
 
-    // Reset all effects
+    // Reset ALL effects
     isBreathing = false;
     isPulsing = false;
     isSparkle = false;
     isFlashingRed = false;
     isFlashingRainbow = false;
+    isWaving = false;
+    isStrobing = false;
+    isAlternating = false;
 
     switch (data.stateNumber) {
 
         // ===== SCENE 1 =====
 
-      case 0:  // "Well, that didn't take long..."
-        Serial.println(F("Purple Breathing - Entrance"));
-        // STOP any crank movement to prevent jitter
-        isCrankPulling = false;
-        isReturningToRest = false;
+      case 0:  // Track001 - "Well, that didn't take long..."
+        Serial.println(F("Dark Purple Breathing"));
         if (crank.attached()) {
           crank.write(CRANK_REST_POSITION);
           crank.detach();
         }
+        isCrankPulling = false;
         isBreathing = true;
         breathingBrightness = 0;
         breathingDirection = 1;
+        setMotorSpeed(MOTOR_IDLE);  // Slow entrance
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track001.mp3");
         break;
 
-      case 1:  // "That's my client. Faithful as a coin toss..."
-        Serial.println(F("Gold - Money colors"));
+      case 1:  // Track002 - "Faithful as a coin toss"
+        Serial.println(F("Gold Sparkle"));
         if (crank.attached()) crank.detach();
-        setColor(255, 200, 0);  // Gold
+        isSparkle = true;
+        setMotorSpeed(MOTOR_NORMAL);
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track002.mp3");
         break;
 
-      case 2:  // "Over there, the wife..."
-        Serial.println(F("Icy White - Clinical"));
+      case 2:                                               // Track003 - "Wife holds a smile"
+        Serial.println(F("White to Cold Blue Breathing"));  // UPGRADED!
         if (crank.attached()) crank.detach();
-        setColor(255, 255, 255);  // White
+        setColor(255, 255, 255);  // White flash
+        delay(300);
+        isBreathing = true;
+        breathingBrightness = 128;
+        breathingDirection = -1;
+        setMotorSpeed(MOTOR_IDLE);  // Cold, slow
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track003.mp3");
         break;
 
-      case 3:  // "Poor kiddo, paternity is a jackpot..."
-        Serial.println(F("Dark Red + Pull - Paternity bomb"));
-        setColor(100, 0, 0);  // Dark red
+      case 3:  // Track004 - "Paternity jackpot"
+        Serial.println(F("Dark Red Pulse → Gold Flash + PULL"));
+        isPulsing = true;
+        breathingBrightness = 100;
+        breathingDirection = 1;
+        setMotorSpeed(MOTOR_EXCITED);  // Big reveal energy!
+        delay(1000);
+        setColor(255, 200, 0);  // Gold flash
         if (!crank.attached()) crank.attach(CRANK_SERVO_PIN);
         isCrankPulling = true;
         isReturningToRest = false;
-        if (CRANK_REST_POSITION < CRANK_PULL_POSITION) {
-          crankPullDirection = 1;
-        } else {
-          crankPullDirection = -1;
-        }
+        crankPullDirection = (CRANK_REST_POSITION < CRANK_PULL_POSITION) ? 1 : -1;
         currentCrankAngle = CRANK_REST_POSITION;
         lastCrankMoveTime = millis();
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track004.mp3");
         break;
 
-      case 4:  // "Flexible in every sense..."
-        Serial.println(F("Hot Pink Pulsing - Sleaze"));
+      case 4:  // Track005 - "Flexible in every sense"
+        Serial.println(F("Hot Pink Fast Pulse"));
         if (crank.attached()) crank.detach();
         isPulsing = true;
         breathingBrightness = 255;
         breathingDirection = -1;
+        setMotorSpeed(MOTOR_SLEAZY);  // Sleazy speed!
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track005.mp3");
         break;
 
-      case 5:  // "Saulbot or something..."
-        Serial.println(F("Green - Mockery"));
+      case 5:  // Track006 - "Saulbot or something"
+        Serial.println(F("Toxic Green Wave"));
         if (crank.attached()) crank.detach();
-        setColor(0, 255, 0);  // Green
+        isWaving = true;
+        wave_r1 = 0;
+        wave_g1 = 255;
+        wave_b1 = 0;
+        wave_r2 = 0;
+        wave_g2 = 100;
+        wave_b2 = 0;
+        setMotorSpeed(MOTOR_NORMAL);
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile ("/track006.mp3");
+        musicPlayer.startPlayingFile("/track006.mp3");
         break;
 
-      case 6:  // "Our judge. Calm, composed..."
-        Serial.println(F("Royal Blue - Respect"));
+      case 6:  // Track007 - "Our judge"
+        Serial.println(F("Royal Blue Breathing"));
         if (crank.attached()) crank.detach();
-        setColor(0, 0, 200);  // Royal blue
+        isBreathing = true;
+        breathingBrightness = 0;
+        breathingDirection = 1;
+        setMotorSpeed(MOTOR_IDLE);  // Respectful, calm
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile ("/track007.mp3");
+        musicPlayer.startPlayingFile("/track007.mp3");
         break;
 
-      case 7:  // "This one's going to be fun."
-        Serial.println(F("RAINBOW + BIG PULL - Game on!"));
+      case 7:  // Track008 - "This one's going to be fun"
+        Serial.println(F("RAINBOW CHASE + PULL"));
         isFlashingRainbow = true;
         rainbowFlashStartTime = millis();
         lastRainbowUpdate = millis();
         rainbowOffset = 0;
+        setMotorSpeed(MOTOR_EXCITED);  // Pumped up!
         if (!crank.attached()) crank.attach(CRANK_SERVO_PIN);
         isCrankPulling = true;
         isReturningToRest = false;
-        if (CRANK_REST_POSITION < CRANK_PULL_POSITION) {
-          crankPullDirection = 1;
-        } else {
-          crankPullDirection = -1;
-        }
+        crankPullDirection = (CRANK_REST_POSITION < CRANK_PULL_POSITION) ? 1 : -1;
         currentCrankAngle = CRANK_REST_POSITION;
         lastCrankMoveTime = millis();
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track008.mp3");
         break;
 
-      case 8:  // "I can smell the deposit fees."
-        Serial.println(F("Gold Sparkle - $$$"));
+      case 8:  // Track009 - "Deposit fees"
+        Serial.println(F("Gold Sparkle Intense"));
         if (crank.attached()) crank.detach();
         isSparkle = true;
+        setMotorSpeed(MOTOR_NORMAL);
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track009.mp3");
         break;
 
-        // ===== SCENE 3 =====
+        // SCENE 3
 
-      case 9:  // "Misunderstanding, huh? Real flexible."
-        Serial.println(F("Orange - Word games"));
+      case 9:  // Track010 - "I walk with confidence"
+        Serial.println(F("Purple Strut Wave"));
         if (crank.attached()) crank.detach();
-        setColor(255, 100, 0);  // Orange
+        isWaving = true;
+        wave_r1 = 150;
+        wave_g1 = 0;
+        wave_b1 = 150;
+        wave_r2 = 50;
+        wave_g2 = 0;
+        wave_b2 = 50;
+        setMotorSpeed(MOTOR_NORMAL);
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track010.mp3");
         break;
 
-      case 10:  // "Like your wife's best friend..."
-        Serial.println(F("Hot Pink Pulse - Innuendo bomb"));
+      case 10:  // Track011 - "Drama side hustle"
+        Serial.println(F("Spinning Orange/Red"));
         if (crank.attached()) crank.detach();
-        isPulsing = true;
-        breathingBrightness = 255;
-        breathingDirection = -1;
+        isWaving = true;
+        wave_r1 = 255;
+        wave_g1 = 100;
+        wave_b1 = 0;
+        wave_r2 = 255;
+        wave_g2 = 0;
+        wave_b2 = 0;
+        setMotorSpeed(MOTOR_NORMAL);
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track011.mp3");
         break;
 
-      case 11:  // "Relax, I'm on your side..."
-        Serial.println(F("Soft Blue Breathing - Fake comfort"));
+      case 11:  // Track012 - "Slot machines"
+        Serial.println(F("Slot Machine Effect"));
         if (crank.attached()) crank.detach();
-        isBreathing = true;
-        breathingBrightness = 0;
-        breathingDirection = 1;
+        setMotorSpeed(MOTOR_EXCITED);  // Casino energy!
+        for (int i = 0; i < 5; i++) {
+          setColor(random(255), random(255), random(255));
+          delay(100);
+        }
+        setColor(255, 200, 0);  // GOLD jackpot
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track012.mp3");
         break;
 
-      case 12:  // "It's not a crime to dance..."
-        Serial.println(F("Purple + White sparkles"));
+      case 12:                                             // Track013 - "Coupon dignity"
+        Serial.println(F("Pink Sparkle to Trash Brown"));  // UPGRADED!
         if (crank.attached()) crank.detach();
-        for (int i = 0; i < strip.numPixels(); i++) {
-          if (i % 3 == 0) {
-            strip.setPixelColor(i, strip.Color(255, 255, 255));  // White (GRB)
-          } else {
-            strip.setPixelColor(i, strip.Color(0, 128, 128));  // Purple (GRB)
-          }
-        }
-        strip.show();
+        isSparkle = true;
+        delay(800);
+        setColor(100, 50, 0);  // Trash brown
+        setMotorSpeed(MOTOR_NORMAL);
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track013.mp3");
         break;
 
-      case 13:  // "Let's make her pay..."
-        Serial.println(F("BLOOD RED PULSE + PULL - Attack!"));
-        isPulsing = true;
-        breathingBrightness = 255;
-        breathingDirection = -1;
-        if (!crank.attached()) crank.attach(CRANK_SERVO_PIN);
-        isCrankPulling = true;
-        isReturningToRest = false;
-        if (CRANK_REST_POSITION < CRANK_PULL_POSITION) {
-          crankPullDirection = 1;
-        } else {
-          crankPullDirection = -1;
-        }
-        currentCrankAngle = CRANK_REST_POSITION;
-        lastCrankMoveTime = millis();
+      case 13:  // Track014 - "Play the house"
+        Serial.println(F("Casino Roulette"));
+        if (crank.attached()) crank.detach();
+        isAlternating = true;
+        setMotorSpeed(MOTOR_NORMAL);
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track014.mp3");
         break;
 
-      case 14:  // "Play the victim..."
-        Serial.println(F("Silver + PULL - Master manipulator"));
-        setColor(180, 180, 180);  // Silver
-        if (!crank.attached()) crank.attach(CRANK_SERVO_PIN);
-        isCrankPulling = true;
-        isReturningToRest = false;
-        if (CRANK_REST_POSITION < CRANK_PULL_POSITION) {
-          crankPullDirection = 1;
-        } else {
-          crankPullDirection = -1;
-        }
-        currentCrankAngle = CRANK_REST_POSITION;
-        lastCrankMoveTime = millis();
-        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile("/track015.mp3");
-        break;
-
-      case 15:  // "Kid's got a sense of humor."
-        Serial.println(F("Cyan - Amused"));
-        if (crank.attached()) crank.detach();
-        setColor(0, 255, 255);  // Cyan
-        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile("/track016.mp3");
-        break;
-
-      case 16:  // "Regret sells better than guilt."
-        Serial.println(F("Purple+Gold + PULL - Philosophy"));
-        for (int i = 0; i < strip.numPixels(); i++) {
-          if (i % 2 == 0) {
-            strip.setPixelColor(i, strip.Color(0, 128, 128));  // Purple (GRB)
-          } else {
-            strip.setPixelColor(i, strip.Color(200, 255, 0));  // Gold (GRB)
-          }
-        }
-        strip.show();
-        if (!crank.attached()) crank.attach(CRANK_SERVO_PIN);
-        isCrankPulling = true;
-        isReturningToRest = false;
-        if (CRANK_REST_POSITION < CRANK_PULL_POSITION) {
-          crankPullDirection = 1;
-        } else {
-          crankPullDirection = -1;
-        }
-        currentCrankAngle = CRANK_REST_POSITION;
-        lastCrankMoveTime = millis();
-        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile("/track017.mp3");
-        break;
-
-        // ===== SCENE 5 - COURTROOM =====
-
-      case 17:  // Opening: "Casanova with a rap sheet"
-        Serial.println(F("WHITE FLASH -> PURPLE + PULL - Opening!"));
-        setColor(255, 255, 255);  // Flash white
-        delay(200);
-        setColor(0, 150, 150);  // Royal purple (GRB)
-        if (!crank.attached()) crank.attach(CRANK_SERVO_PIN);
-        isCrankPulling = true;
-        isReturningToRest = false;
-        if (CRANK_REST_POSITION < CRANK_PULL_POSITION) {
-          crankPullDirection = 1;
-        } else {
-          crankPullDirection = -1;
-        }
-        currentCrankAngle = CRANK_REST_POSITION;
-        lastCrankMoveTime = millis();
-        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile("/track018.mp3");
-        break;
-
-      case 18:  // "Sure, he danced..."
-        Serial.println(F("Orange - Dismissive"));
-        if (crank.attached()) crank.detach();
-        setColor(255, 100, 0);  // Orange
-        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile("/track019.mp3");
-        break;
-
-      case 19:  // "Vegas casino at midnight"
-        Serial.println(F("Gold + Red alternating - Vegas"));
-        if (crank.attached()) crank.detach();
-        for (int i = 0; i < strip.numPixels(); i++) {
-          if (i % 2 == 0) {
-            strip.setPixelColor(i, strip.Color(200, 255, 0));  // Gold (GRB)
-          } else {
-            strip.setPixelColor(i, strip.Color(0, 255, 0));  // Red (GRB)
-          }
-        }
-        strip.show();
-        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile("/track020.mp3");
-        break;
-
-      case 20:  // "Opposing counsel Saulbot..."
-        Serial.println(F("Green Pulsing - Mocking rival"));
-        if (crank.attached()) crank.detach();
-        isPulsing = true;
-        breathingBrightness = 255;
-        breathingDirection = -1;
-        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile("/track021.mp3");
-        break;
-
-      case 21:  // "Preacher on Sunday, bachelor on Friday"
-        Serial.println(F("White -> Pink Flash - Holy to sleazy"));
-        setColor(255, 255, 255);  // White
-        delay(300);
-        setColor(100, 255, 100);  // Pink (GRB)
-        if (crank.attached()) crank.detach();
-        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile("/track022.mp3");
-        break;
-
-      case 22:  // "Harassment claims alphabetically"
-        Serial.println(F("BRIGHT RED + PULL - Scandal bomb!"));
-        setColor(0, 255, 0);  // Bright red (GRB)
-        if (!crank.attached()) crank.attach(CRANK_SERVO_PIN);
-        isCrankPulling = true;
-        isReturningToRest = false;
-        if (CRANK_REST_POSITION < CRANK_PULL_POSITION) {
-          crankPullDirection = 1;
-        } else {
-          crankPullDirection = -1;
-        }
-        currentCrankAngle = CRANK_REST_POSITION;
-        lastCrankMoveTime = millis();
-        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile("/track023.mp3");
-        break;
-
-      case 23:  // "Your Honor, I trust your judgment..."
-        Serial.println(F("Royal Blue Breathing - Flattery"));
+      case 14:  // Track015 - "Only sane ones"
+        Serial.println(F("Calm Teal Breathing"));
         if (crank.attached()) crank.detach();
         isBreathing = true;
         breathingBrightness = 0;
         breathingDirection = 1;
+        setMotorSpeed(MOTOR_IDLE);  // Fake calm
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track015.mp3");
+        break;
+
+      case 15:  // Track016 - "What's your angle"
+        Serial.println(F("Sarcastic Rainbow"));
+        if (crank.attached()) crank.detach();
+        isFlashingRainbow = true;
+        rainbowFlashStartTime = millis();
+        lastRainbowUpdate = millis();
+        rainbowOffset = 0;
+        setMotorSpeed(MOTOR_NORMAL);
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track016.mp3");
+        break;
+
+      case 16:                                       // Track017 - "Consistently pathetic"
+        Serial.println(F("Blue to Sad Grey Wave"));  // UPGRADED!
+        if (crank.attached()) crank.detach();
+        isWaving = true;
+        wave_r1 = 0;
+        wave_g1 = 0;
+        wave_b1 = 200;  // Blue
+        wave_r2 = 100;
+        wave_g2 = 100;
+        wave_b2 = 100;  // Grey
+        setMotorSpeed(MOTOR_IDLE);
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track017.mp3");
+        break;
+
+      case 17:                                       // Track018 - "I think they mean us"
+        Serial.println(F("Spotlight White Pulse"));  // UPGRADED!
+        if (crank.attached()) crank.detach();
+        isPulsing = true;
+        breathingBrightness = 255;
+        breathingDirection = -1;
+        setMotorSpeed(MOTOR_NORMAL);
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track018.mp3");
+        break;
+
+      case 18:  // Track019 - "We need to win"
+        Serial.println(F("Determined Red Pulse"));
+        if (crank.attached()) crank.detach();
+        isPulsing = true;
+        breathingBrightness = 255;
+        breathingDirection = -1;
+        setMotorSpeed(MOTOR_ANGRY);  // Intense!
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track019.mp3");
+        break;
+
+      case 19:                                       // Track020 - "Save that pleasure"
+        Serial.println(F("Smug Purple Breathing"));  // UPGRADED!
+        if (crank.attached()) crank.detach();
+        isBreathing = true;
+        breathingBrightness = 200;
+        breathingDirection = 1;
+        setMotorSpeed(MOTOR_SLEAZY);
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track020.mp3");
+        break;
+
+        // SCENE 5 - COURTROOM
+
+      case 20:  // Track021 - "Casanova rap sheet"
+        Serial.println(F("WHITE FLASH → PURPLE + PULL"));
+        setColor(255, 255, 255);
+        delay(200);
+        isPulsing = true;
+        breathingBrightness = 150;
+        breathingDirection = 1;
+        setMotorSpeed(MOTOR_EXCITED);  // Grand opening!
+        if (!crank.attached()) crank.attach(CRANK_SERVO_PIN);
+        isCrankPulling = true;
+        isReturningToRest = false;
+        crankPullDirection = (CRANK_REST_POSITION < CRANK_PULL_POSITION) ? 1 : -1;
+        currentCrankAngle = CRANK_REST_POSITION;
+        lastCrankMoveTime = millis();
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track021.mp3");
+        break;
+
+      case 21:  // Track022 - "Sure he danced"
+        Serial.println(F("Lazy Orange Sway"));
+        if (crank.attached()) crank.detach();
+        isWaving = true;
+        wave_r1 = 255;
+        wave_g1 = 150;
+        wave_b1 = 0;
+        wave_r2 = 200;
+        wave_g2 = 100;
+        wave_b2 = 0;
+        setMotorSpeed(MOTOR_IDLE);  // Dismissive, lazy
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track022.mp3");
+        break;
+
+      case 22:  // Track023 - "Vegas casino"
+        Serial.println(F("Vegas Neon Strobe"));
+        if (crank.attached()) crank.detach();
+        setMotorSpeed(MOTOR_EXCITED);  // Vegas energy!
+        for (int i = 0; i < 3; i++) {
+          setColor(255, 200, 0);
+          delay(100);
+          setColor(255, 0, 0);
+          delay(100);
+          setColor(255, 100, 100);
+          delay(100);
+        }
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track023.mp3");
+        break;
+
+      case 23:  // Track024 - "Saulbot downfall"
+        Serial.println(F("Apocalyptic Red Flash"));
+        if (crank.attached()) crank.detach();
+        isStrobing = true;
+        setMotorSpeed(MOTOR_ANGRY);  // Aggressive mockery!
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track024.mp3");
         break;
 
-      case 24:  // "A bit of dancing, a lot of exaggeration..."
-        Serial.println(F("Soft Purple - Reasonable"));
+      case 24:                                                         // Track025 - "Preacher/bachelor"
+        Serial.println(F("Holy White Breathing → Party Pink Pulse"));  // UPGRADED!
         if (crank.attached()) crank.detach();
-        setColor(0, 100, 100);  // Soft purple (GRB)
+        isBreathing = true;
+        breathingBrightness = 255;
+        breathingDirection = -1;
+        delay(900);
+        isPulsing = true;
+        setMotorSpeed(MOTOR_SLEAZY);  // Hypocrisy!
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track025.mp3");
         break;
 
-      case 25:  // "Now, tell us, kid..."
-        Serial.println(F("Yellow - Interrogation"));
-        if (crank.attached()) crank.detach();
-        setColor(255, 255, 0);  // Yellow
+      case 25:                                           // Track026 - "Harassment alphabetically"
+        Serial.println(F("SCANDAL RED STROBE + PULL"));  // UPGRADED!
+        isStrobing = true;
+        setMotorSpeed(MOTOR_ANGRY);  // Maximum scandal energy!
+        if (!crank.attached()) crank.attach(CRANK_SERVO_PIN);
+        isCrankPulling = true;
+        isReturningToRest = false;
+        crankPullDirection = (CRANK_REST_POSITION < CRANK_PULL_POSITION) ? 1 : -1;
+        currentCrankAngle = CRANK_REST_POSITION;
+        lastCrankMoveTime = millis();
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track026.mp3");
         break;
 
-      case 26:  // "Did your father look like..."
-        Serial.println(F("Gentle Blue - Leading question"));
+      case 26:  // Track027 - "I trust your judgment"
+        Serial.println(F("Flattering Blue/Gold Wave"));
         if (crank.attached()) crank.detach();
-        setColor(150, 100, 255);  // Gentle blue (GRB)
+        isWaving = true;
+        wave_r1 = 0;
+        wave_g1 = 0;
+        wave_b1 = 200;
+        wave_r2 = 255;
+        wave_g2 = 200;
+        wave_b2 = 0;
+        setMotorSpeed(MOTOR_IDLE);  // Smooth flattery
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track027.mp3");
         break;
 
-      case 27:  // "What would you say your father was thinking?"
-        Serial.println(F("Teal - Probing"));
+      case 27:  // Track028 - "Same damn thing"
+        Serial.println(F("Chaotic Multi-Color Flicker"));
         if (crank.attached()) crank.detach();
-        setColor(0, 200, 150);  // Teal (GRB - swapped)
+        isSparkle = true;
+        setMotorSpeed(MOTOR_NORMAL);
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track028.mp3");
         break;
 
-      case 28:  // "Kids say the darndest things..."
-        Serial.println(F("Nervous Orange Flicker"));
+        // CHILD QUESTIONING
+
+      case 28:  // Track029 - "Tell us kid"
+        Serial.println(F("Interrogation Yellow Spotlight"));
         if (crank.attached()) crank.detach();
-        isSparkle = true;
+        isPulsing = true;  // UPGRADED from solid!
+        breathingBrightness = 255;
+        breathingDirection = -1;
+        setMotorSpeed(MOTOR_NORMAL);
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track029.mp3");
         break;
 
-      case 29:  // "If you had to choose..."
-        Serial.println(F("Dark Red - The trap"));
+      case 29:                                       // Track030 - "Betraying or dancing"
+        Serial.println(F("Gentle Blue Breathing"));  // UPGRADED!
         if (crank.attached()) crank.detach();
-        setColor(0, 150, 0);  // Dark red (GRB)
+        isBreathing = true;
+        breathingBrightness = 128;
+        breathingDirection = 1;
+        setMotorSpeed(MOTOR_IDLE);  // Gentle manipulation
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track030.mp3");
         break;
 
-      case 30:  // "But I meant between your mother and father."
-        Serial.println(F("Yellow/White flicker - Panic"));
+      case 30:  // Track031 - "What was father thinking"
+        Serial.println(F("Teal Probing Pulse"));
         if (crank.attached()) crank.detach();
-        for (int i = 0; i < strip.numPixels(); i++) {
-          if (random(2) == 0) {
-            strip.setPixelColor(i, strip.Color(255, 255, 255));  // White
-          } else {
-            strip.setPixelColor(i, strip.Color(255, 255, 0));  // Yellow
-          }
-        }
-        strip.show();
+        isPulsing = true;
+        breathingBrightness = 200;
+        breathingDirection = 1;
+        setMotorSpeed(MOTOR_NORMAL);
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         musicPlayer.startPlayingFile("/track031.mp3");
         break;
 
-      case 31:  // "JACKPOT!"
-        Serial.println(F("EXPLOSIVE RAINBOW + MAX PULL - VICTORY!!!"));
-        // Flash sequence
+      case 31:  // Track032 - "Darndest things"
+        Serial.println(F("Nervous Orange Flicker"));
+        if (crank.attached()) crank.detach();
+        isSparkle = true;
+        setMotorSpeed(MOTOR_EXCITED);  // Nervous energy!
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track032.mp3");
+        break;
+
+      case 32:                                // Track033 - "Better parent"
+        Serial.println(F("Trap Red Pulse"));  // UPGRADED!
+        if (crank.attached()) crank.detach();
+        isPulsing = true;
+        breathingBrightness = 150;
+        breathingDirection = 1;
+        setMotorSpeed(MOTOR_NORMAL);
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track033.mp3");
+        break;
+
+      case 33:  // Track034 - "Between mother and father"
+        Serial.println(F("Panic Yellow/White Flicker"));
+        if (crank.attached()) crank.detach();
+        for (int i = 0; i < strip.numPixels(); i++) {
+          if (random(2)) {
+            strip.setPixelColor(i, strip.Color(255, 255, 255));
+          } else {
+            strip.setPixelColor(i, strip.Color(255, 255, 0));
+          }
+        }
+        strip.show();
+        setMotorSpeed(MOTOR_EXCITED);  // Panic!
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track034.mp3");
+        break;
+
+        // VICTORY & PANIC
+
+      case 34:  // Track035 - "JACKPOT!"
+        Serial.println(F("EXPLOSIVE RAINBOW + MAX PULL"));
         setColor(255, 255, 255);
         delay(100);
         setColor(0, 0, 0);
         delay(50);
         setColor(255, 255, 255);
         delay(100);
-        // Then rainbow
         isFlashingRainbow = true;
         rainbowFlashStartTime = millis();
         lastRainbowUpdate = millis();
         rainbowOffset = 0;
+        setMotorSpeed(MOTOR_ANGRY);  // MAXIMUM ENERGY!
         if (!crank.attached()) crank.attach(CRANK_SERVO_PIN);
         isCrankPulling = true;
         isReturningToRest = false;
-        if (CRANK_REST_POSITION < CRANK_PULL_POSITION) {
-          crankPullDirection = 1;
-        } else {
-          crankPullDirection = -1;
-        }
+        crankPullDirection = (CRANK_REST_POSITION < CRANK_PULL_POSITION) ? 1 : -1;
         currentCrankAngle = CRANK_REST_POSITION;
         lastCrankMoveTime = millis();
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
-        musicPlayer.startPlayingFile("/track032.mp3");
+        musicPlayer.startPlayingFile("/track035.mp3");
+        break;
+
+      case 35:  // Track036 - "Most lucrative case"
+        Serial.println(F("Desperate Chaos Strobe"));
+        if (crank.attached()) crank.detach();
+        isStrobing = true;
+        setMotorSpeed(MOTOR_ANGRY);  // Panicking!
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/track036.mp3");
+        break;
+
+        // 2 Idle modes
+
+      case 36:  // LISTENING MODE (SW4)
+        Serial.println(F("LISTENING: Yellow/Orange Alternating"));
+        if (crank.attached()) crank.detach();
+        isCrankPulling = false;
+        isAlternating = true;
+        setMotorSpeed(MOTOR_NORMAL);  // Attentive listening
+        // NO MUSIC
+        break;
+
+      case 37:  // IDLE MODE (SW5) - NEW!
+        Serial.println(F("IDLE: Calm Rainbow + Slow Motor"));
+        if (crank.attached()) crank.detach();
+        isCrankPulling = false;
+        isFlashingRainbow = true;
+        rainbowFlashStartTime = millis();
+        lastRainbowUpdate = millis();
+        rainbowOffset = 0;
+        setMotorSpeed(MOTOR_IDLE);  // Gentle idle
+        // NO MUSIC - just vibing
         break;
 
       default:
@@ -1151,6 +1342,5 @@ void loop() {
 // end of receiver code
 // CHANGEHERE
 */
-
 
 // Uncomment this to activate the receiver code
