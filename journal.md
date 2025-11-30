@@ -218,4 +218,20 @@ We also revisited the audio issue. The professor suggested a fix: ensure the mus
 ### November 26
 Today we finalized our play script and made sure we were fully happy with the lines. We generated all the audio files and wrote the updated code and cases to match the finalized dialogue. In tomorrow’s rehearsal, we plan to test everything together, make sure the flow feels right, and then adjust the colors, timing, tones, or any other details that need refinement. We also hope to have some time to addresss the motor issue tomorrow. 
 
+### Entry Eighteen: Motor Fixes and Front Decoration
+### November 27
+<img src="https://github.com/user-attachments/assets/e9384c31-f4c3-4688-8daa-7532378a4d86" width="300">
+
+We spent this session fixing the motor and beginning to design stickers for the front of the robot, since it still looked empty. The motor was not fitting correctly and was not spinning the reels, so we realized we needed to adjust the shelf. This meant cutting the shelf itself, widening the gap, and reshaping the area so the motor could sit correctly and the reels could spin without friction. While making these adjustments, we also realized we needed to refine the code again. There were a few small bugs, and some of the color choices in the lighting did not look the way we wanted. We made the necessary updates and prepared to test everything after rehearsal.
+
+
+### Entry Nineteen: Post-Rehearsal Adjustments
+### November 28
+<img src="https://github.com/user-attachments/assets/8230f327-2222-4b4a-816e-b5a91817dc9d" width="300">
+After rehearsal, we saw that the NeoPixel lighting still was not expressive enough, and the robot overall did not feel as lively as we wanted. The professor suggested adjusting the motor speed so the movement could better match the emotion or energy of each case, and we decided to implement that. We also continued refining the shelf. We had to cut it more than expected, and the professor helped by taking several trips to the scene shop to get the exact cuts we needed. We widened the gap in multiple stages and finally reached a configuration that worked reliably for both the [motor and the reels]([url](https://youtu.be/y9D4M84iITM)). We will now be able to finish decorating the side of the robot and adding the stickers to the reels. 
+
+
+### Entry Twenty: Weekend Work and Increasing Expressiveness
+### November 29-31
+Last class, we discussed adding additional NeoPixel strips to make the robot more expressive, and we began implementing that. We are adding new strips to the front and sides of the robot to give it more visual presence during the performance. We also implemented the updated motor speed control, adjusting the rotation speed per case so the robot’s behavior changes depending on the moment. The lighting effects were also adjusted; instead of using solid colors, we changed the patterns so they shift more dynamically and support the mood of each scene. Whats remaiing is to test all of these code adjustments & put all the stickers on the robot.
 
