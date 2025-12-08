@@ -141,7 +141,7 @@ During rehearsal the next day, we discovered a major issue: the robot had signif
 <img src="https://github.com/user-attachments/assets/cca1b9c2-4223-4e61-95f4-680f138ca075" width="300">
 <img src="https://github.com/user-attachments/assets/28734686-fc81-4c60-bd43-8139a0a61853" width="300">
 <img src="https://github.com/user-attachments/assets/11f878a1-b480-4fc4-96aa-bf82cf46d772" width="300">
-[cases demo]([url](https://drive.google.com/file/d/1NXZ6YmgtkAqCHvUBDg4O09I4oM1MH2kT/view?usp=sharing))
+[cases demo](https://drive.google.com/file/d/1NXZ6YmgtkAqCHvUBDg4O09I4oM1MH2kT/view?usp=sharing)
 
 Because the robot had a ‘top-heavy’ balance and was unstable, we decided to add a second caster wheel on the back. The scene shop was closed, so I used the scraps in the IM lab + the wood planks for the original shelf idea I had to prototype the position. I used clamps to make sure the caster did not touch the ground unless the robot leaned too far back. Once the alignment felt right, I bolted everything down.
 
@@ -198,7 +198,7 @@ We also adjusted our code for the wheels as we were happy with the smoothness bu
 <img src="https://github.com/user-attachments/assets/fad8c566-1dd1-42fa-90b3-9b56b5af4dac" width="300">
 <img src="https://github.com/user-attachments/assets/d5cd9fae-9235-4fd3-88a7-5563b60d63a3" width="300">
 <img src="https://github.com/user-attachments/assets/100101c7-e421-423f-bd00-e6cdb31ed0b6" width="300">
-We spent this session redecorating the reels and drilling new holes in the shelf to accommodate the updated structure. Decorating the reels took much longer than expected, but as we continued working, we found a method that made the process more consistent and manageable. By the end, we were happy with how they looked, it honestly wasn't perfect, but we realized this is the best we would be able to get, and we are okay with the imperfections for now. When we went to attach the decorated reels to the bracket connected to the motor, the fit was incorrect. We removed the bracket, and then reattached it to the shelf. After powering the system, [only the motor was working (see demo]([url](https://youtu.be/QX0EPyKBajg)), while the reels themselves did not move. We will troubleshoot and find a solution next session with the professor.
+We spent this session redecorating the reels and drilling new holes in the shelf to accommodate the updated structure. Decorating the reels took much longer than expected, but as we continued working, we found a method that made the process more consistent and manageable. By the end, we were happy with how they looked, it honestly wasn't perfect, but we realized this is the best we would be able to get, and we are okay with the imperfections for now. When we went to attach the decorated reels to the bracket connected to the motor, the fit was incorrect. We removed the bracket, and then reattached it to the shelf. After powering the system, [only the motor was working (see demo](https://youtu.be/QX0EPyKBajg), while the reels themselves did not move. We will troubleshoot and find a solution next session with the professor.
 Aside from the mechanical work, I also updated Scene 3 to improve the flow and give the robot more lines. With the updated script, we now need to recode the cases and regenerate the corresponding audio before Thursdays rehearsal.
 
 ### Entry Sixteen: Decoration and Reinforcement
@@ -228,7 +228,7 @@ We spent this session fixing the motor and beginning to design stickers for the 
 ### Entry Nineteen: Post-Rehearsal Adjustments
 ### November 28
 <img src="https://github.com/user-attachments/assets/8230f327-2222-4b4a-816e-b5a91817dc9d" width="300">
-After rehearsal, we saw that the NeoPixel lighting still was not expressive enough, and the robot overall did not feel as lively as we wanted. The professor suggested adjusting the motor speed so the movement could better match the emotion or energy of each case, and we decided to implement that. We also continued refining the shelf. We had to cut it more than expected, and the professor helped by taking several trips to the scene shop to get the exact cuts we needed. We widened the gap in multiple stages and finally reached a configuration that worked reliably for both the [motor and the reels]([url](https://youtu.be/y9D4M84iITM)). We will now be able to finish decorating the side of the robot and adding the stickers to the reels. 
+After rehearsal, we saw that the NeoPixel lighting still was not expressive enough, and the robot overall did not feel as lively as we wanted. The professor suggested adjusting the motor speed so the movement could better match the emotion or energy of each case, and we decided to implement that. We also continued refining the shelf. We had to cut it more than expected, and the professor helped by taking several trips to the scene shop to get the exact cuts we needed. We widened the gap in multiple stages and finally reached a configuration that worked reliably for both the [motor and the reels](https://youtu.be/y9D4M84iITM). We will now be able to finish decorating the side of the robot and adding the stickers to the reels. 
 
 
 ### Entry Twenty: Weekend Work and Increasing Expressiveness
