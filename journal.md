@@ -141,6 +141,7 @@ During rehearsal the next day, we discovered a major issue: the robot had signif
 <img src="https://github.com/user-attachments/assets/cca1b9c2-4223-4e61-95f4-680f138ca075" width="300">
 <img src="https://github.com/user-attachments/assets/28734686-fc81-4c60-bd43-8139a0a61853" width="300">
 <img src="https://github.com/user-attachments/assets/11f878a1-b480-4fc4-96aa-bf82cf46d772" width="300">
+
 [cases demo](https://drive.google.com/file/d/1NXZ6YmgtkAqCHvUBDg4O09I4oM1MH2kT/view?usp=sharing)
 
 Because the robot had a ‘top-heavy’ balance and was unstable, we decided to add a second caster wheel on the back. The scene shop was closed, so I used the scraps in the IM lab + the wood planks for the original shelf idea I had to prototype the position. I used clamps to make sure the caster did not touch the ground unless the robot leaned too far back. Once the alignment felt right, I bolted everything down.
@@ -198,7 +199,8 @@ We also adjusted our code for the wheels as we were happy with the smoothness bu
 <img src="https://github.com/user-attachments/assets/fad8c566-1dd1-42fa-90b3-9b56b5af4dac" width="300">
 <img src="https://github.com/user-attachments/assets/d5cd9fae-9235-4fd3-88a7-5563b60d63a3" width="300">
 <img src="https://github.com/user-attachments/assets/100101c7-e421-423f-bd00-e6cdb31ed0b6" width="300">
-We spent this session redecorating the reels and drilling new holes in the shelf to accommodate the updated structure. Decorating the reels took much longer than expected, but as we continued working, we found a method that made the process more consistent and manageable. By the end, we were happy with how they looked, it honestly wasn't perfect, but we realized this is the best we would be able to get, and we are okay with the imperfections for now. When we went to attach the decorated reels to the bracket connected to the motor, the fit was incorrect. We removed the bracket, and then reattached it to the shelf. After powering the system, only the motor was working [(see demo)](https://youtu.be/QX0EPyKBajg), while the reels themselves did not move. We will troubleshoot and find a solution next session with the professor.
+
+We spent this session redecorating the reels and drilling new holes in the shelf to accommodate the updated structure. Decorating the reels took much longer than expected, but as we continued working, we found a method that made the process more consistent and manageable. By the end, we were happy with how they looked, it honestly wasn't perfect, but we realized this is the best we would be able to get, and we are okay with the imperfections for now. When we went to attach the decorated reels to the bracket connected to the motor, the fit was incorrect. We removed the bracket, and then reattached it to the shelf. After powering the system, only the motor was working, while the reels themselves [did not move](https://www.youtube.com/watch?v=QX0EPyKBajg). We will troubleshoot and find a solution next session with the professor.
 Aside from the mechanical work, I also updated Scene 3 to improve the flow and give the robot more lines. With the updated script, we now need to recode the cases and regenerate the corresponding audio before Thursdays rehearsal.
 
 ### Entry Sixteen: Decoration and Reinforcement
@@ -208,6 +210,7 @@ Aside from the mechanical work, I also updated Scene 3 to improve the flow and g
 <img src="https://github.com/user-attachments/assets/e42b711d-32a3-44d6-b931-15303161b208" width="300">
 <img src="https://github.com/user-attachments/assets/f93963c0-80bf-4d54-9b2e-460a6ea7451c" width="300">
 <img src="https://github.com/user-attachments/assets/8a4eca88-9ff6-4cb4-884d-78764f4eaf13" width="300">
+
 In this session, we focused on decorating the sides and the front of the robot. For the sides, we used a black wood-pattern material, and for the front we used a shiny silver one. We peeled and stuck everything into place, but we intentionally left the top half of the right section undecorated. That area holds the motor, and since we still need to address the motor issue, we decided to keep it as cardboard for now so we do not create extra trouble cutting through decoration later.
 
 During rehearsals, we also noticed a stability problem with the top section of the robot. The NeoPixel housing sits on top of a piece of wood mounted onto the cardboard, and the entire structure was heavier than expected. It was not reinforced as well as it needed to be, so it would sometimes wobble. We prepared to strengthen it using cardboard gussets, but then realized we had a few leftover wood blocks from prototyping. One of them was almost the perfect length, so we used L-brackets to attach it directly to the tall vertical plank of wood that gives the robot its height. We then used wood glue to secure the block against the cardboard. This made the top significantly more stable, and we felt much more comfortable with its structure.
@@ -237,7 +240,7 @@ Last class, we discussed adding additional NeoPixel strips to make the robot mor
 
 
 ### Entry Twenty-One: NeoPixel Strips and Reel Updates
-### Decemeber 2-4
+### December 2-4
 <img src="https://github.com/user-attachments/assets/bb577558-c848-46d6-a630-ad966ebe85b5" width="300">
 
 In this session, my teammate worked closely with the professor to add the new NeoPixel strips to the robot. Once they were attached, I added the corresponding code and tested all the lighting functions. There were a few hiccups with the new effects that we figured out then everything worked as we [intended](https://youtu.be/U0-pfUWAg5I). We had just one minor issue which is that the first 2-3 cases dont rurn on the dc motor but we thinkw e figured out a solution we just have to test it. We also finished designing and printing the new stickers. Later in the session we began attaching the stickers onto the reels. Once all of them were applied, the reels looked as we intended and the decoration was consistent with our original plan. We still need to add the stickers to the front of the robot which we will do in the next session. When it was time to move the robots out for [rehearsal](https://youtube.com/shorts/Tcu3pqmJTfU), we noticed a new issue with the motor. Only one wheel was spinning, and even that wheel worked only part of the time. The professor suggested switching to more reliable slower motors, and we will do that in the next session. There was also an empty section on the side of the robot that we had left undecorated because we were still adjusting the DC motor and servo motor. Since those parts were now at a stable stage, we covered that section as well and decided to also decorate the back. Next session, we will update the idle sw5 state to fully turn everyhting on rather than being rainbow, we will add a sound when it acitvates, fix the motors for the wheels, and double check that the dc motor not spinning int he first few cases is resolved. 
