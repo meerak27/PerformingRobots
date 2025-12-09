@@ -65,11 +65,11 @@
 
 // CHANGEHERE
 // For the transmitter
-// const int NRF_CE_PIN = A4, NRF_CSN_PIN = A5;
+const int NRF_CE_PIN = A4, NRF_CSN_PIN = A5;
 
 // CHANGEHERE
 // for the receiver
-const int NRF_CE_PIN = A11, NRF_CSN_PIN = A15;
+//const int NRF_CE_PIN = A11, NRF_CSN_PIN = A15;
 
 // nRF 24L01 pin   name
 //          1      GND
@@ -136,12 +136,30 @@ void setupRF24Common() {
 
 
 // CHANGEHERE
-/*
+
 // Transmitter code
 
 // Transmitter pin usage
 const int LCD_RS_PIN = 3, LCD_EN_PIN = 2, LCD_D4_PIN = 4, LCD_D5_PIN = 5, LCD_D6_PIN = 6, LCD_D7_PIN = 7;
 const int SW1_PIN = 8, SW2_PIN = 9, SW3_PIN = 10, SW4_PIN = A3, SW5_PIN = A2;
+
+#ifdef __arm__
+// should use uinstd.h to define sbrk but Due causes a conflict
+extern "C" char* sbrk(int incr);
+#else   // __ARM__
+extern char* __brkval;
+#endif  // __arm__
+
+int freeMemory() {
+  char top;
+#ifdef __arm__
+  return &top - reinterpret_cast<char*>(sbrk(0));
+#elif defined(CORE_TEENSY) || (ARDUINO > 103 && ARDUINO != 151)
+  return &top - __brkval;
+#else   // __arm__
+  return __brkval ? &top - __brkval : &top - __malloc_heap_start;
+#endif  // __arm__
+}
 
 // LCD library code
 #include <LiquidCrystal.h>
@@ -151,7 +169,7 @@ LiquidCrystal lcd(LCD_RS_PIN, LCD_EN_PIN, LCD_D4_PIN, LCD_D5_PIN, LCD_D6_PIN, LC
 
 
 // MEERA EDIT
-const int NUM_OF_STATES = 37;
+const int NUM_OF_STATES = 39;
 char* theStates[] = {
   // 0–8  : Scene 1 – Opening Aside (Tracks 001–009)
   "Well, that didn't",        // 0 - Track001
@@ -197,7 +215,8 @@ char* theStates[] = {
   "Most lucrative case",  // 35 - Track036
   // 36 : Listening mode (no audio just neos)
   "LISTENING",  // 36 - SW4 state
-  "OFF",       // 37 - SW5 state (idle/default)
+  "OFF",        // 37 - SW5 state (idle/default)
+  "Gasp",       // 38 - Gasp collective
 };
 
 
@@ -361,8 +380,9 @@ void setup() {
 }
 
 
-
 void loop() {
+  Serial.print("Free Memory = ");
+  Serial.println(freeMemory());
   for (int i = 0; i < NUMBUTTONS; i++) {
     theButtons[i].update();
   }
@@ -379,7 +399,7 @@ void clearData() {
 // CHANGEHERE
 
 
-*/
+/*
 
 // Receiver Code
 // CHANGEHERE
@@ -415,11 +435,11 @@ const int CRANK_SERVO_PIN = 20;  // This is the pin for your crank servo
 // MEERA EDITS
 const int MOTOR_PIN = 8;        // DC motor control pin
 const int MOTOR_OFF = 0;        // Stopped
-const int MOTOR_IDLE = 100;     // Slow, calm ~40% speed
-const int MOTOR_NORMAL = 110;   // Regular speed ~60%
-const int MOTOR_SLEAZY = 150;   // Medium-fast ~70%
-const int MOTOR_EXCITED = 170;  // Fast, energetic ~85%
-const int MOTOR_ANGRY = 200;    // Maximum speed 100%
+const int MOTOR_IDLE = 130;     // Slow, calm ~40% speed
+const int MOTOR_NORMAL = 150;   // Regular speed ~60%
+const int MOTOR_SLEAZY = 170;   // Medium-fast ~70%
+const int MOTOR_EXCITED = 190;  // Fast, energetic ~85%
+const int MOTOR_ANGRY = 210;    // Maximum speed 100%
 bool isFlashingRed = false;
 unsigned long redFlashStartTime = 0;
 const unsigned long RED_FLASH_DURATION = 4500;
@@ -1348,7 +1368,11 @@ void loop() {
         // Stop music
         if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
         break;
-
+      case 38:  // Gasp Mode
+        Serial.println(F("Gasping"));
+        if (musicPlayer.playingMusic) musicPlayer.stopPlaying();
+        musicPlayer.startPlayingFile("/shocksfx.mp3");        
+        break;
       default:
         Serial.println(F("Invalid case"));
         if (crank.attached()) crank.detach();
@@ -1361,5 +1385,6 @@ void loop() {
 // end of receiver code
 // CHANGEHERE
 
+*/
 
 // Uncomment this to activate the receiver code
