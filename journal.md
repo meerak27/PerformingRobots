@@ -253,3 +253,17 @@ In this session, my teammate worked closely with the professor to add the new Ne
 In this session, we worked closely with the professor to figure out why the right motor was not spinning. We used the multimeter to test the connections, including the pins on the Arduino, the pins on the H-bridge, and all the cabling. The goal was to identify which component was causing the issue, whether it was the motor itself, the Arduino, or the H-bridge. During testing, we noticed that the ground was not connected. Although we fixed it, we realized that could not have been the main issue because a missing ground would likely have affected both motors. After more testing, we found that the real problem was the H-bridge not behaving as expected. Once we replaced the H-bridge with a new one, both motors worked correctly. We also tightened the bolts as they were loose. During these sessions where we work on the base I think of how much it easier it would have been if we had more access to the base. When we started the project we didnt know where we were going with it however, in hindsight I would have prefered to design the shape in a way that the base is easily accessible.
 After resolving the motor issue, we added the final front decorations to the robot and made the remaining code adjustments we wanted. At this stage, we think we are done with the robot, but we say that with caution because we do not want to jinx it. That remains to be solidified after todays rehearsals.
 
+### Entry Twenty-Three: Final Rehearsal Adjustments
+### December 9
+In the very last rehearsal, we realized the backwards movement was not behaving the way we wanted. We made a few quick adjustments to the code to smooth it out, and after testing, everything worked as expected. With that, the technical side of the project felt complete, and we were ready for the performance.
+
+
+### Final Reflections
+### December 10
+
+<img src="https://github.com/user-attachments/assets/a9b8ed3e-ead2-456f-91c5-31b895649a80" width="300">
+
+[Jack Potts Performance Snippet](https://youtube.com/shorts/wRNVUy_Cr-A)
+I am genuinely grateful for this class and everything it pushed me to learn. The patience, knowledge, and willingness to teach that the professor brought into every session made a real difference, and it shaped the way we approached the project from start to finish. This class was unlike anything I had taken before. Working with one partner for the entire semester meant learning how to navigate different working styles, stress points, and responsibilities together, and that became as much a part of the learning process as the physical computing itself.
+
+The class required us to be more proactive and intentional, especially since there were no strict deadlines for each component. We had to think ahead, plan our time, and make sure the project continued to move forward in a way that made sense. That long-term thinking and self-management made me feel more ownership over the work, and looking back, it strengthened my skills more than I expected. We were really happy with how the performance turned out, and it felt rewarding to see everything come together after the amount of building, troubleshooting, and revising we did. I want to thank everyone in the class for the support and collaboration throughout the semester, and thank the professor again for guiding us through a project that was challenging in the best way.
